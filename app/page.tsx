@@ -55,6 +55,7 @@ type HistoryEntry = {
   old_position: number | null;
   new_position: number | null;
   created_at: string;
+  cause: string;
 };
 
 type LevelPoints = {
@@ -560,9 +561,9 @@ export default function Home() {
 
     async function loadHistory() {
       const { data, error } = await supabase
-        .from("placement_history")
+        .from("ihps_position_history")
         .select(
-          "id, level_id, old_position, new_position, created_at"
+          "id, level_id, old_position, new_position, created_at, cause"
         )
         .eq("level_id", selectedId)
         .order("created_at", {
@@ -1138,37 +1139,37 @@ export default function Home() {
                     <div className="mt-4 rounded-lg bg-black/20 p-4">
 
                       {history.length === 0 ? (
-                        <p className="text-sm text-gray-400">
-                          No position history available.
-                        </p>
+                        <p className="text-sm text-gray-400">No position history recorded yet.</p>
                       ) : (
-                        <div className="space-y-3">
-
-                          {history.map((entry) => (
-                            <div
-                              key={entry.id}
-                              className="flex flex-wrap justify-between gap-2 border-b border-white/10 pb-2 text-sm"
-                            >
-                              <span>
-                                {entry.old_position == null
-                                  ? "Unranked"
-                                  : `#${entry.old_position}`}
-
-                                {" → "}
-
-                                {entry.new_position == null
-                                  ? "Unranked"
-                                  : `#${entry.new_position}`}
-                              </span>
-
-                              <span className="text-gray-400">
-                                {new Date(
-                                  entry.created_at
-                                ).toLocaleDateString()}
-                              </span>
-                            </div>
-                          ))}
-
+                        <div className="overflow-x-auto">
+                          <table className="w-full min-w-[520px] text-left text-sm">
+                            <thead className="border-b border-white/20 text-gray-400">
+                              <tr>
+                                <th className="py-3 pr-3">Position</th>
+                                <th className="py-3 pr-3">Change</th>
+                                <th className="py-3 pr-3">Cause</th>
+                                <th className="py-3">Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {history.map((entry) => {
+                                const delta = entry.old_position == null || entry.new_position == null
+                                  ? null : entry.old_position - entry.new_position;
+                                return (
+                                  <tr key={entry.id} className="border-b border-white/10 last:border-0">
+                                    <td className="py-3 pr-3 font-bold">{entry.new_position == null ? "Unranked" : `#${entry.new_position}`}</td>
+                                    <td className="py-3 pr-3 whitespace-nowrap">
+                                      {delta == null || delta === 0 ? <span className="text-gray-500">—</span> :
+                                        delta > 0 ? <span className="text-green-400">↑ {delta}</span> :
+                                        <span className="text-red-400">↓ {Math.abs(delta)}</span>}
+                                    </td>
+                                    <td className="py-3 pr-3 text-gray-200">{entry.cause}</td>
+                                    <td className="py-3 whitespace-nowrap text-gray-400">{new Date(entry.created_at).toLocaleDateString()}</td>
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
                         </div>
                       )}
 
