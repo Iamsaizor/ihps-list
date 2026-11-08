@@ -251,6 +251,8 @@ export default function Home() {
   >([]);
   const [tagsError, setTagsError] = useState("");
 
+  const [historyError, setHistoryError] = useState("");
+  const [historyLoading, setHistoryLoading] = useState(false);
   const [history, setHistory] = useState<
     HistoryEntry[]
   >([]);
@@ -554,12 +556,15 @@ export default function Home() {
   useEffect(() => {
     if (!selectedId) {
       setHistory([]);
+      setHistoryError("");
       return;
     }
 
     let cancelled = false;
 
     async function loadHistory() {
+      setHistoryLoading(true);
+      setHistoryError("");
       const { data, error } = await supabase
         .from("ihps_position_history")
         .select(
@@ -571,12 +576,9 @@ export default function Home() {
         });
 
       if (cancelled) return;
-
-      setHistory(
-        error
-          ? []
-          : ((data ?? []) as HistoryEntry[])
-      );
+      setHistoryLoading(false);
+      setHistoryError(error ? `History database error: ${error.message}` : "");
+      setHistory((data ?? []) as HistoryEntry[]);
     }
 
     void loadHistory();
@@ -1138,8 +1140,12 @@ export default function Home() {
                   {historyOpen && (
                     <div className="mt-4 rounded-lg bg-black/20 p-4">
 
-                      {history.length === 0 ? (
-                        <p className="text-sm text-gray-400">No position history recorded yet.</p>
+                      {historyError ? (
+                        <p role="alert" className="text-sm text-red-400">{historyError}</p>
+                      ) : historyLoading ? (
+                        <p className="text-sm text-gray-400">Loading position history...</p>
+                      ) : history.length === 0 ? (
+                        <p className="text-sm text-gray-400">No position history rows found for this level. Run the included SQL repair and refresh.</p>
                       ) : (
                         <div className="overflow-x-auto">
                           <table className="w-full min-w-[520px] text-left text-sm">
