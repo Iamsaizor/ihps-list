@@ -1145,7 +1145,7 @@ export default function Home() {
                       ) : historyLoading ? (
                         <p className="text-sm text-gray-400">Loading position history...</p>
                       ) : history.length === 0 ? (
-                        <p className="text-sm text-gray-400">No position history rows found for this level. Run the included SQL repair and refresh.</p>
+                        <p className="text-sm text-gray-400">No position history recorded.</p>
                       ) : (
                         <div className="overflow-x-auto">
                           <table className="w-full min-w-[520px] text-left text-sm">
