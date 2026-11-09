@@ -4,7 +4,7 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 
 type Player = { user_id: string; username: string; display_name: string | null; staff_tags: string[] };
-const STAFF_TAGS = ["Administrator", "Demon List Mod", "Challenge List Mod", "Impossible List Mod", "Future Demon List Mod", "Developer", "List Manager"];
+const STAFF_TAGS = ["Founder", "Administrator", "Demon List Mod", "Challenge List Mod", "Impossible List Mod", "Future Demon List Mod", "Developer", "List Manager"];
 
 export default function FounderTagManagement() {
   const [search, setSearch] = useState("");
@@ -56,7 +56,7 @@ export default function FounderTagManagement() {
           <input className="min-w-0 flex-1 rounded border border-white/20 bg-[#1d1d23] px-4 py-3" placeholder="Search player username or display name" value={search} onChange={e => setSearch(e.target.value)} maxLength={100}/>
           <button className="rounded bg-orange-500 px-5 py-3 font-bold text-black" disabled={loading}>SEARCH</button>
         </form>
-        <p className="mb-4 text-xs text-gray-400">Founder cannot be assigned here. These are display tags only; they do not grant website or database permissions.</p>
+        <p className="mb-4 text-xs text-gray-400">Founder is a display-only title and can be assigned here. Only the designated ihpslists management account can use this panel; tags do not grant permissions.</p>
         <div className="space-y-4">{players.map(player => <section key={player.user_id} className="rounded-xl border border-white/10 bg-[#1b1b21] p-4">
           <div className="mb-3"><Link href={`/players/${encodeURIComponent(player.username)}`} className="text-lg font-bold text-orange-400 hover:underline">{player.display_name || player.username}</Link><span className="ml-2 text-sm text-gray-400">@{player.username}</span>{player.staff_tags.includes("Founder") && <span className="ml-2 text-xs text-amber-400">FOUNDER</span>}</div>
           <div className="flex flex-wrap gap-2">{STAFF_TAGS.map(tag => { const has = player.staff_tags.includes(tag); return <button key={tag} type="button" disabled={Boolean(busy)} onClick={() => void changeTag(player,tag)} title={has ? `Revoke ${tag}` : `Grant ${tag}`} className={`rounded border px-3 py-2 text-sm font-semibold disabled:opacity-50 ${has ? "border-orange-500 bg-orange-500/15 text-orange-300" : "border-white/15 bg-[#2a2a32] text-gray-300"}`}>{has ? "✓ " : "+ "}{tag}</button>; })}</div>
