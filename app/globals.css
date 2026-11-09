@@ -24,3 +24,10 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Accent customization is scoped to public player profiles only. */
+.ihps-accent-profile .text-orange-400, .ihps-accent-profile .text-orange-500 { color: var(--ihps-accent); }
+.ihps-accent-profile .bg-orange-500 { background-color: var(--ihps-accent); }
+.ihps-accent-profile .border-orange-500 { border-color: var(--ihps-accent); }
+.ihps-accent-profile .border-orange-500\/40 { border-color: color-mix(in srgb, var(--ihps-accent) 40%, transparent); }
+.ihps-accent-profile .hover\:ring-orange-500:hover { --tw-ring-color: var(--ihps-accent); }
