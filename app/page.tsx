@@ -777,9 +777,13 @@ export default function Home() {
         ==================================================== */}
 
         <aside className="min-w-0 rounded-xl border border-white/25 bg-[#1b1b20]/45 p-3 backdrop-blur-[2px]">
-          <h2 className="mb-4 text-center text-xl font-bold">
-            {listLabel}
-          </h2>
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <h2 className="min-w-0 text-xl font-bold">{listLabel}</h2>
+            <Link href={`/rules/${activeList}`} className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-white/20 bg-[#29292f] px-3 py-2 text-xs font-bold text-gray-200 transition hover:border-orange-500/70 hover:bg-orange-500/10 hover:text-orange-300" aria-label={`View ${listLabel} rules`}>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+              Rules
+            </Link>
+          </div>
 
           <div className="mb-3 flex gap-2">
             <input
