@@ -15,6 +15,7 @@ type Level = {
   id: string;
   name: string;
   position: number;
+  tentative: boolean;
   creator: string | null;
   publisher: string | null;
   verifier: string | null;
@@ -456,7 +457,7 @@ export default function Home() {
       const { data, error } = await supabase
         .from("levels")
         .select(
-          "id, name, position, creator, publisher, verifier, " +
+          "id, name, position, tentative, creator, publisher, verifier, " +
             "gd_level_id, youtube_url, image_url, " +
             "description, cps, difficulty_class, level_length, " +
             "list_percentage, predicted_position, wr_user, wr_percent, song_name"
@@ -863,6 +864,17 @@ export default function Home() {
                 <h2 className="border-b border-white/30 pb-2 text-[34px] font-extrabold leading-tight tracking-tight">
                   {selectedLevel.name}
                 </h2>
+
+                {selectedLevel.tentative && (
+                  <div className="mt-3 rounded-lg border border-amber-500/60 bg-amber-500/10 px-4 py-3" role="note" aria-label="Tentative placement">
+                    <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-amber-300">
+                      <span aria-hidden="true">⚠</span> TENTATIVE PLACEMENT
+                    </div>
+                    <p className="mt-1 text-sm leading-relaxed text-amber-100/90">
+                      This ranking is based on limited or unreliable difficulty opinions. Its placement may change as more reliable opinions become available.
+                    </p>
+                  </div>
+                )}
 
                 {/* DESCRIPTION */}
 

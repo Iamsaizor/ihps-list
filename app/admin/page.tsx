@@ -29,6 +29,7 @@ type Level = {
   list_id: string;
   name: string;
   position: number;
+  tentative: boolean;
   creator: string | null;
   publisher: string | null;
   verifier: string | null;
@@ -59,6 +60,7 @@ type LevelTag = {
 type LevelForm = {
   name: string;
   position: string;
+  tentative: boolean;
   creator: string;
   publisher: string;
   verifier: string;
@@ -96,6 +98,7 @@ type Tooltip = {
 const EMPTY_FORM: LevelForm = {
   name: "",
   position: "",
+  tentative: false,
   creator: "",
   publisher: "",
   verifier: "",
@@ -227,6 +230,7 @@ function formFromLevel(level: Level): LevelForm {
   return {
     name: level.name,
     position: String(level.position),
+    tentative: level.tentative ?? false,
     creator: level.creator ?? "",
     publisher: level.publisher ?? "",
     verifier: level.verifier ?? "",
@@ -457,9 +461,9 @@ export default function AdminPage() {
     setIsError(error);
   }
 
-  function updateField(
-    field: keyof LevelForm,
-    value: string
+  function updateField<K extends keyof LevelForm>(
+    field: K,
+    value: LevelForm[K]
   ) {
     setForm((previous) => ({
       ...previous,
@@ -731,7 +735,7 @@ export default function AdminPage() {
       const { data, error } = await supabase
         .from("levels")
         .select(
-          "id, list_id, name, position, creator, publisher, " +
+          "id, list_id, name, position, tentative, creator, publisher, " +
             "verifier, gd_level_id, youtube_url, " +
             "image_url, description, list_percentage, " +
             "predicted_position, wr_user, wr_percent, song_name, cps, level_length"
@@ -1139,6 +1143,12 @@ export default function AdminPage() {
       );
       if (predictionError) throw new Error("Predicted Placement: " + predictionError.message);
     }
+
+    const { error: tentativeError } = await supabase.rpc("admin_set_level_tentative", {
+      target_level_id: savedId,
+      chosen_tentative: values.tentative,
+    });
+    if (tentativeError) throw new Error("Tentative Placement: " + tentativeError.message);
 
     const { error: tagError } = await supabase.rpc("admin_set_level_tags", {
       target_level_id: savedId,
@@ -1633,6 +1643,20 @@ export default function AdminPage() {
                   disabled={!canManage || busy}
                 />
               </Field>
+
+              <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-amber-500/30 bg-amber-500/10 p-4">
+                <input
+                  type="checkbox"
+                  checked={form.tentative}
+                  onChange={(event) => updateField("tentative", event.target.checked)}
+                  disabled={!canManage || busy}
+                  className="mt-1 h-4 w-4 accent-amber-500"
+                />
+                <span>
+                  <span className="block text-sm font-bold text-amber-300">TENTATIVE PLACEMENT</span>
+                  <span className="mt-1 block text-xs text-gray-300">Mark this ranking as uncertain because difficulty opinions are limited or unreliable. A highlighted notice will appear on the public level page.</span>
+                </span>
+              </label>
 
               {/* ==============================================
                   RANKING POSITION
