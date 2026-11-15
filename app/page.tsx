@@ -773,7 +773,6 @@ export default function Home() {
     "demon",
     "challenge",
     "impossible",
-    "future-demon",
   ];
 
   // ==========================================================
@@ -795,13 +794,41 @@ export default function Home() {
         <div className="mx-auto flex max-w-[1900px] flex-wrap items-center gap-3 lg:gap-6">
           <h1 className="mr-2 text-3xl font-black tracking-tight text-orange-500">ihPS</h1>
           <nav className="flex flex-wrap items-center gap-2" aria-label="Main navigation">
-            {navigationSlugs.map((slug) => {
+            <div className="relative" onClick={(event) => event.stopPropagation()} onMouseEnter={() => setOpenDropdown("demon")} onMouseLeave={() => setOpenDropdown(null)}>
+              <button
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded={openDropdown === "demon"}
+                onClick={() => setOpenDropdown(openDropdown === "demon" ? null : "demon")}
+                className={`flex items-center gap-2 rounded-lg px-3 py-2.5 text-xs font-extrabold transition sm:px-4 sm:text-sm ${activeList === "demon" || activeList === "future-demon" ? "bg-orange-500 text-white" : "bg-[#29292f] text-gray-400 hover:text-white"}`}
+              >
+                DEMON LIST <span className="text-xs" aria-hidden="true">{openDropdown === "demon" ? "▴" : "▾"}</span>
+              </button>
+              {openDropdown === "demon" && (
+                <div role="menu" aria-label="Demon lists" className="absolute left-0 top-full z-50 w-56 pt-2">
+                  <div className="overflow-hidden rounded-xl border border-white/15 bg-[#222228] p-1.5 shadow-2xl">
+                    {(["demon", "future-demon"] as const).map((slug) => (
+                      <button
+                        key={slug}
+                        type="button"
+                        role="menuitem"
+                        onClick={() => changeList(slug)}
+                        className={`block w-full rounded-lg px-3 py-2.5 text-left text-sm font-bold transition ${activeList === slug ? "bg-orange-500/20 text-orange-400" : "text-gray-200 hover:bg-white/10 hover:text-white"}`}
+                      >
+                        {slug === "demon" ? "DEMON LIST" : "FUTURE DEMON LIST"}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+            {navigationSlugs.filter((slug) => slug !== "demon").map((slug) => {
               const list = lists.find((item) => item.slug === slug);
               if (!list) return null;
               const isActive = activeList === slug;
               return <button key={list.id} type="button" onClick={() => changeList(slug)}
                 className={`rounded-lg px-3 py-2.5 text-xs font-extrabold transition sm:px-4 sm:text-sm ${isActive ? "bg-orange-500 text-white" : "bg-[#29292f] text-gray-400 hover:text-white"}`}>
-                {slug === "demon" ? "DEMON LIST" : slug === "challenge" ? "CHALLENGE LIST" : slug === "impossible" ? "IMPOSSIBLE LIST" : "FUTURE DEMON LIST"}
+                {slug === "challenge" ? "CHALLENGE LIST" : "IMPOSSIBLE LIST"}
               </button>;
             })}
             <Link href="/leaderboards" className="rounded-lg bg-[#29292f] px-3 py-2.5 text-xs font-extrabold text-gray-300 hover:text-white sm:px-4 sm:text-sm">LEADERBOARDS</Link>
