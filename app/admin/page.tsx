@@ -135,6 +135,9 @@ const TAG_CATEGORIES: Record<string, string[]> = {
     "2.1",
     "2.0",
     "1.9",
+    "1.8",
+    "1.7",
+    "1.6>",
   ],
 
   "LEVEL LENGTH": [
@@ -200,12 +203,7 @@ const TAG_CATEGORIES: Record<string, string[]> = {
   "250+ CPS",
   "500+ CPS",
   "1000+ CPS",
-  "Googology",
-  "Theoretically Possible",
-  "Humanly Impossible",
-  "Humanly Possible",
   "TPS Bypass",
-  "Counter",
   "Snap",
 ],
 };

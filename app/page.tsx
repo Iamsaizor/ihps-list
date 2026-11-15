@@ -86,13 +86,13 @@ const EMPTY_FILTERS: FilterSettings = {
 };
 
 const FILTER_TAG_GROUPS: Record<string, string[]> = {
-  "GAME VERSION": ["2.2", "2.1", "2.0", "1.9"],
+  "GAME VERSION": ["2.2", "2.1", "2.0", "1.9", "1.8", "1.7", "1.6>"],
   "LEVEL LENGTH": ["Medium", "Long", "XL", "XXL", "XXL+"],
   "SPECIAL FEATURES": ["NONG", "2P", "Circles", "Gimmicky", "Learny", "Memory"],
   "GAMEPLAY STYLE": ["Slow-Paced", "Fast-Paced", "Clicksync", "Flow", "Mirror"],
   "DIFFICULTY CHARACTERISTICS": ["Nerve Control", "Consistency", "Chokepoints", "High CPS", "Timings", "Precision", "Unbalanced", "End-Heavy", "Beginning-Heavy", "Physically Demanding"],
   GAMEMODES: ["Overall", "Cube", "Ship", "Ball", "UFO", "Wave", "Robot", "Spider", "Swing", "Old Swing", "Duals"],
-  "ILL EXCLUSIVE": ["Swift Clicks", "Alignments", "Macrobuffs", "MINUSwave", "30+ CPS", "50+ CPS", "100+ CPS", "250+ CPS", "500+ CPS", "1000+ CPS", "Googology", "Theoretically Possible", "Humanly Impossible", "Humanly Possible", "TPS Bypass", "Counter", "Snap", "Mechanically Impossible", "Unverified Possibility", "TAS-Only", "Frame Perfects", "Consecutive Frame Perfects", "Subframe Precision", "Tick Perfects", "Zero Margin", "Pixel Perfect", "Subpixel Precision", "Perfect Trajectory", "Hitbox Abuse", "TAS Verified", "Bot Verified", "Simulation Verified", "Unsolved", "Version-Locked"],
+  "ILL EXCLUSIVE": ["Swift Clicks", "Alignments", "Macrobuffs", "MINUSwave", "30+ CPS", "50+ CPS", "100+ CPS", "250+ CPS", "500+ CPS", "1000+ CPS", "TPS Bypass", "Snap", "Mechanically Impossible", "Unverified Possibility", "TAS-Only", "Frame Perfects", "Consecutive Frame Perfects", "Subframe Precision", "Tick Perfects", "Zero Margin", "Pixel Perfect", "Subpixel Precision", "Perfect Trajectory", "Hitbox Abuse", "TAS Verified", "Bot Verified", "Simulation Verified", "Unsolved", "Version-Locked"],
 };
 
 function tagGroup(name: string): string {
