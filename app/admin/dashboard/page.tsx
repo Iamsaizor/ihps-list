@@ -61,6 +61,11 @@ export default function AdminDashboardPage() {
       title: "SUBMISSION REVIEWS", detail: "Review records, reverse decisions and view moderation history for your assigned lists.",
       href: "/admin/submissions", icon: "✓", badge: founder ? "ALL LISTS" : "ASSIGNED LISTS",
     }] : []),
+    ...(founder || listNames.some((name) => name.toLowerCase().includes("impossible")) ? [{
+      title: "IMPOSSIBLE LEVEL REVIEWS",
+      detail: "Review bot-verified ILL level submissions, request macro files and evidence, and approve levels for manual placement.",
+      href: "/admin/impossible-submissions", icon: "◇", badge: "ILL STAFF",
+    }] : []),
     ...(founder ? [{
       title: "STAFF MANAGEMENT", detail: "Promote or remove moderators and assign their list-review permissions.",
       href: "/admin/staff", icon: "♛", badge: "FOUNDERS ONLY",
