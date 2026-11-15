@@ -12,7 +12,7 @@ const RULES: Record<string, ListRules> = {
       rule("Verification", "Levels must be verified and uploaded to ihPS."),
       rule("Length", "Levels must be at least 30 seconds long."),
       rule("Fair Gameplay", "Levels cannot rely on luck, RNG, or broken game mechanics."),
-      rule("Accessibility", "Levels must be possible on all supported devices with standard mods like CBF and FPS bypass."),
+      rule("Accessibility", "Levels must be possible on all supported devices with standard mods like CBF."),
       rule("TPS Bypass", "TPS bypass is not allowed. Levels must be possible at 240 TPS."),
       rule("Buffed Versions", "Buffed copies of existing levels must have major gameplay changes to be ranked separately."),
       rule("Legitimate Verification", "Macros, noclip, speedhacks, and other cheats are not allowed."),

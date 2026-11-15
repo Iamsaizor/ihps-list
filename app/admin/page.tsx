@@ -204,7 +204,7 @@ const TAG_CATEGORIES: Record<string, string[]> = {
   "Theoretically Possible",
   "Humanly Impossible",
   "Humanly Possible",
-  "FPS Bypass",
+  "TPS Bypass",
   "Counter",
   "Snap",
 ],
