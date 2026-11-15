@@ -231,6 +231,40 @@ function DetailRow({
 // ============================================================
 
 export default function Home() {
+  const [canAccessAdmin, setCanAccessAdmin] = useState(false);
+
+  // Reuse the exact staff permissions RPC used by /admin/dashboard.
+  useEffect(() => {
+    let alive = true;
+    let requestId = 0;
+
+    async function checkStaffAccess() {
+      const currentRequest = ++requestId;
+      setCanAccessAdmin(false);
+      const { data: authData, error: authError } = await supabase.auth.getUser();
+      if (!alive || currentRequest !== requestId || authError || !authData.user) return;
+
+      const { data, error } = await supabase.rpc("ihps_my_staff_access");
+      if (!alive || currentRequest !== requestId || error) return;
+      const access = (data ?? []) as { is_founder: boolean; list_id: string | null }[];
+      setCanAccessAdmin(access.some((row) => row.is_founder || Boolean(row.list_id)));
+    }
+
+    void checkStaffAccess();
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
+      // Defer Supabase calls until after the auth callback finishes.
+      queueMicrotask(() => { if (alive) void checkStaffAccess(); });
+    });
+    const onFocus = () => { void checkStaffAccess(); };
+    window.addEventListener("focus", onFocus);
+    return () => {
+      alive = false;
+      requestId++;
+      subscription.unsubscribe();
+      window.removeEventListener("focus", onFocus);
+    };
+  }, []);
+
   const [lists, setLists] = useState<List[]>([]);
 
   const [activeList, setActiveList] =
@@ -772,6 +806,9 @@ export default function Home() {
             })}
             <Link href="/leaderboards" className="rounded-lg bg-[#29292f] px-3 py-2.5 text-xs font-extrabold text-gray-300 hover:text-white sm:px-4 sm:text-sm">LEADERBOARDS</Link>
             <Link href="/submit" className="rounded-lg bg-[#29292f] px-3 py-2.5 text-xs font-extrabold text-gray-300 hover:text-white sm:px-4 sm:text-sm">SUBMIT A RECORD</Link>
+            {canAccessAdmin && (
+              <Link href="/admin/dashboard" className="rounded-lg bg-[#29292f] px-3 py-2.5 text-xs font-extrabold text-orange-400 transition hover:bg-[#36363f] hover:text-orange-300 sm:px-4 sm:text-sm">ADMIN DASHBOARD</Link>
+            )}
           </nav>
           <div className="ml-auto flex items-center gap-2.5 sm:gap-3">
             <a href="https://discord.gg/726ESqR3KZ" target="_blank" rel="noopener noreferrer" title="Join ihPS Discord" aria-label="Join ihPS Discord" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-500 text-white hover:bg-orange-600">
