@@ -33,6 +33,15 @@ type Level = {
   song_name: string | null;
 };
 
+type ImpossibleWorldRecord = {
+  submission_id: string;
+  user_id: string;
+  username: string | null;
+  display_name: string | null;
+  percent: number | string;
+  completion_url: string;
+};
+
 type List = {
   id: string;
   slug: string;
@@ -312,6 +321,50 @@ export default function Home() {
   const selectedLevel = levels.find(
     (level) => level.id === selectedId
   );
+
+  const [illWorldRecord, setIllWorldRecord] = useState<ImpossibleWorldRecord | null>(null);
+  const [illWorldRecordLoading, setIllWorldRecordLoading] = useState(false);
+
+  // World records come ONLY from accepted human record submissions,
+  // never from manually entered level WR fields.
+  useEffect(() => {
+    if (!isImpossibleList || !selectedLevel?.id) {
+      setIllWorldRecord(null);
+      setIllWorldRecordLoading(false);
+      return;
+    }
+    let active = true;
+    const levelId = selectedLevel.id;
+    setIllWorldRecord(null);
+    setIllWorldRecordLoading(true);
+    async function loadWorldRecord() {
+      const { data, error } = await supabase
+        .from("public_level_records")
+        .select("submission_id,user_id,username,display_name,percent,completion_url")
+        .eq("level_id", levelId)
+        .order("percent", { ascending: false })
+        .limit(1);
+      if (!active) return;
+      setIllWorldRecord(!error && data?.length ? data[0] as ImpossibleWorldRecord : null);
+      setIllWorldRecordLoading(false);
+    }
+    void loadWorldRecord();
+    const refresh = () => { void loadWorldRecord(); };
+    window.addEventListener("focus", refresh);
+    const interval = window.setInterval(refresh, 30000);
+    return () => {
+      active = false;
+      window.removeEventListener("focus", refresh);
+      window.clearInterval(interval);
+    };
+  }, [isImpossibleList, selectedLevel?.id]);
+
+  const worldRecordVideoId = isImpossibleList
+    ? youtubeId(illWorldRecord?.completion_url ?? null)
+    : null;
+  const worldRecordVideoUrl = worldRecordVideoId
+    ? `https://www.youtube-nocookie.com/embed/${worldRecordVideoId}`
+    : null;
 
   const selectedPoints = selectedLevel
     ? points[selectedLevel.id]
@@ -933,6 +986,49 @@ export default function Home() {
 
                 )}
 
+                {isImpossibleList && (
+                  <div className="mt-5 max-w-[760px] rounded-xl border border-orange-500/30 bg-[#1b1b20]/70 p-4">
+                    <h3 className="text-lg font-extrabold text-white">World Record</h3>
+                    {illWorldRecordLoading && !illWorldRecord ? (
+                      <p className="mt-2 text-sm text-gray-400">Loading world record...</p>
+                    ) : illWorldRecord ? (
+                      <>
+                        <p className="my-2 text-sm text-gray-200">
+                          <span className="font-bold text-orange-400">
+                            {Number(illWorldRecord.percent).toLocaleString(undefined, { maximumFractionDigits: 4 })}%
+                          </span>
+                          {" — "}
+                          {illWorldRecord.username ? (
+                            <Link href={`/players/${encodeURIComponent(illWorldRecord.username)}`} className="font-bold hover:text-orange-400 hover:underline">
+                              {illWorldRecord.display_name?.trim() || illWorldRecord.username}
+                            </Link>
+                          ) : (
+                            <span className="font-bold">{illWorldRecord.display_name?.trim() || "Unknown player"}</span>
+                          )}
+                        </p>
+                        {worldRecordVideoUrl ? (
+                          <div className="aspect-video w-full overflow-hidden rounded-xl bg-black">
+                            <iframe
+                              key={`wr-${illWorldRecord.submission_id}`}
+                              src={worldRecordVideoUrl}
+                              title={`${selectedLevel.name} world record video`}
+                              className="h-full w-full"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              allowFullScreen
+                            />
+                          </div>
+                        ) : illWorldRecord.completion_url ? (
+                          <a href={illWorldRecord.completion_url} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-orange-400 hover:underline">
+                            Watch world record footage ↗
+                          </a>
+                        ) : null}
+                      </>
+                    ) : (
+                      <p className="mt-2 text-sm text-gray-400">No accepted human world record yet.</p>
+                    )}
+                  </div>
+                )}
+
                 {/* ============================================
                     LEVEL TAGS
                 ============================================ */}
@@ -1060,7 +1156,7 @@ export default function Home() {
                       isFutureList
                         ? "FUTURE LIST RANK"
                         : isImpossibleList
-                        ? "WR USER"
+                        ? "WORLD RECORD HOLDER"
                         : activeList === "challenge"
                         ? "LENGTH"
                         : "SONG"
@@ -1069,7 +1165,7 @@ export default function Home() {
                       isFutureList
                         ? `#${selectedLevel.position}`
                         : isImpossibleList
-                        ? selectedLevel.wr_user || "—"
+                        ? illWorldRecordLoading ? "..." : (illWorldRecord?.display_name?.trim() || illWorldRecord?.username || "—")
                         : activeList === "challenge"
                         ? selectedLevel.level_length || "—"
                         : selectedLevel.song_name || "—"
@@ -1081,14 +1177,14 @@ export default function Home() {
                   {!isFutureList && activeList !== "challenge" && <Stat
                     title={
                       isImpossibleList
-                        ? "WR %"
+                        ? "WORLD RECORD"
                         : "PARTIAL POINTS"
                     }
                     value={
                       isImpossibleList
-                        ? selectedLevel.wr_percent == null
-                          ? "—"
-                          : `${selectedLevel.wr_percent}%`
+                        ? illWorldRecordLoading ? "..." : illWorldRecord
+                          ? `${Number(illWorldRecord.percent).toLocaleString(undefined, { maximumFractionDigits: 4 })}%`
+                          : "—"
                         : pointsLoading
                         ? "..."
                         : formatPoints(partial)
@@ -1217,7 +1313,7 @@ export default function Home() {
         ==================================================== */}
 
         <aside className="min-w-0 rounded-xl border border-white/25 bg-[#1b1b20]/45 p-4 backdrop-blur-[2px]">
-          <LevelRecords levelId={selectedLevel?.id ?? null} />
+          <LevelRecords levelId={selectedLevel?.id ?? null} worldRecordOnly={isImpossibleList} />
         </aside>
 
         </div> {/* End three-column grid */}

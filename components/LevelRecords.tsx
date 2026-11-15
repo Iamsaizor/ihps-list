@@ -31,7 +31,7 @@ function safeVideoUrl(raw: string): string | null {
 
 const PAGE_SIZE = 8;
 
-export default function LevelRecords({ levelId }: { levelId: string | null }) {
+export default function LevelRecords({ levelId, worldRecordOnly = false }: { levelId: string | null; worldRecordOnly?: boolean }) {
   const [records, setRecords] = useState<RecordRow[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -74,15 +74,19 @@ export default function LevelRecords({ levelId }: { levelId: string | null }) {
     return () => { active = false; window.removeEventListener("focus", onFocus); window.clearInterval(interval); };
   }, [levelId]);
 
-  const filtered = useMemo(() => records.filter((record) =>
+  const displayedRecords = useMemo(() => worldRecordOnly
+    ? [...records].sort((a, b) => Number(b.percent) - Number(a.percent)).slice(0, 1)
+    : records, [records, worldRecordOnly]);
+
+  const filtered = useMemo(() => displayedRecords.filter((record) =>
     `${record.display_name ?? ""} ${record.username ?? ""}`.toLowerCase().includes(search.toLowerCase().trim())
-  ), [records, search]);
+  ), [displayedRecords, search]);
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const visible = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <div className="min-w-0">
-      <h2 className="border-b border-white/30 pb-2 text-2xl font-bold">Records ({records.length})</h2>
+      <h2 className="border-b border-white/30 pb-2 text-2xl font-bold">{worldRecordOnly ? "World Record" : `Records (${records.length})`}</h2>
       <label className="mt-4 block">
         <span className="sr-only">Search records</span>
         <input
@@ -94,7 +98,7 @@ export default function LevelRecords({ levelId }: { levelId: string | null }) {
       </label>
       {loading && records.length === 0 && <p className="mt-4 text-sm text-gray-400">Loading records...</p>}
       {error && <p className="mt-4 text-sm text-red-400">Could not load records: {error}. Run the included SQL in Supabase.</p>}
-      {!loading && !error && records.length === 0 && <p className="mt-4 text-sm text-gray-400">No accepted records yet.</p>}
+      {!loading && !error && records.length === 0 && <p className="mt-4 text-sm text-gray-400">{worldRecordOnly ? "No accepted human world record yet." : "No accepted records yet."}</p>}
       {!error && <div className="mt-3 space-y-1">
         {visible.map((record) => {
           const name = record.display_name?.trim() || record.username || "Unknown player";
