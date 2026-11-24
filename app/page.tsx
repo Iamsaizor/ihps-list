@@ -24,6 +24,10 @@ type Level = {
   image_url: string | null;
   description: string | null;
   cps: string | null;
+  required_tps: string | null;
+  required_fps: string | null;
+  average_cps: string | null;
+  technical_notes: string | null;
   difficulty_class: string | null;
   level_length: string | null;
   list_percentage: number | null;
@@ -547,7 +551,7 @@ export default function Home() {
           "id, name, position, tentative, creator, publisher, verifier, " +
             "gd_level_id, youtube_url, image_url, " +
             "description, cps, difficulty_class, level_length, " +
-            "list_percentage, predicted_position, wr_user, wr_percent, song_name"
+            "list_percentage, predicted_position, wr_user, wr_percent, song_name, required_tps, required_fps, average_cps, technical_notes"
         )
         .eq("list_id", currentList!.id)
         .order("position", {
@@ -1147,6 +1151,28 @@ export default function Home() {
                     SIX STATISTICS
                 ============================================ */}
 
+                {isImpossibleList ? (
+                  <div className="mt-5 space-y-5">
+                    <section>
+                      <h3 className="mb-3 text-lg font-extrabold">General Information</h3>
+                      <div className="grid grid-cols-3 gap-y-4">
+                        <Stat title="LEVEL ID" value={String(selectedLevel.gd_level_id ?? "—")} />
+                        <Stat title="SONG" value={selectedLevel.song_name || "—"} />
+                        <Stat title="LENGTH" value={selectedLevel.level_length || "—"} />
+                      </div>
+                    </section>
+                    <section className="border-t border-white/15 pt-4">
+                      <h3 className="mb-3 text-lg font-extrabold">Technical Requirements</h3>
+                      <div className="grid grid-cols-2 gap-y-4 sm:grid-cols-4">
+                        <Stat title="PEAK CPS" value={selectedLevel.cps || "—"} />
+                        <Stat title="REQUIRED TPS" value={selectedLevel.required_tps || "—"} />
+                        <Stat title="REQUIRED FPS" value={selectedLevel.required_fps || "—"} />
+                        <Stat title="AVERAGE CPS" value={selectedLevel.average_cps || "—"} />
+                      </div>
+                      {selectedLevel.technical_notes && <p className="mt-4 whitespace-pre-wrap break-words text-sm text-gray-200"><span className="font-bold text-orange-400">Technical notes: </span>{selectedLevel.technical_notes}</p>}
+                    </section>
+                  </div>
+                ) : (
                 <div className={`mt-5 grid gap-y-4 ${isFutureList || activeList === "challenge" ? "grid-cols-2" : "grid-cols-3"}`}>
 
                   {/* LEVEL ID */}
@@ -1265,6 +1291,8 @@ export default function Home() {
                   />}
 
                 </div>
+
+                )}
 
                 {/* ============================================
                     CREATOR DETAILS

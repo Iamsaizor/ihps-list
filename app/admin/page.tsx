@@ -43,6 +43,10 @@ type Level = {
   wr_percent: number | null;
   song_name: string | null;
   cps: string | null;
+  required_tps: string | null;
+  required_fps: string | null;
+  average_cps: string | null;
+  technical_notes: string | null;
   level_length: string | null;
 };
 
@@ -74,6 +78,10 @@ type LevelForm = {
   wr_percent: string;
   song_name: string;
   cps: string;
+  required_tps: string;
+  required_fps: string;
+  average_cps: string;
+  technical_notes: string;
   level_length: string;
 };
 
@@ -112,6 +120,10 @@ const EMPTY_FORM: LevelForm = {
   wr_percent: "",
   song_name: "",
   cps: "",
+  required_tps: "",
+  required_fps: "",
+  average_cps: "",
+  technical_notes: "",
   level_length: "",
 };
 
@@ -257,6 +269,10 @@ function formFromLevel(level: Level): LevelForm {
     song_name: level.song_name ?? "",
     cps: level.cps == null ? "" : String(level.cps),
     level_length: level.level_length ?? "",
+    required_tps: level.required_tps ?? "",
+    required_fps: level.required_fps ?? "",
+    average_cps: level.average_cps ?? "",
+    technical_notes: level.technical_notes ?? "",
   };
 }
 
@@ -736,7 +752,7 @@ export default function AdminPage() {
           "id, list_id, name, position, tentative, creator, publisher, " +
             "verifier, gd_level_id, youtube_url, " +
             "image_url, description, list_percentage, " +
-            "predicted_position, wr_user, wr_percent, song_name, cps, level_length"
+            "predicted_position, wr_user, wr_percent, song_name, cps, level_length, required_tps, required_fps, average_cps, technical_notes"
         )
         .eq("list_id", activeListId)
         .order("position", {
@@ -1050,6 +1066,16 @@ export default function AdminPage() {
       )) throw new Error("WR % must be between 0 and 100.");
     }
 
+    const technical = {
+      required_tps: (values.required_tps ?? "").trim() || null,
+      required_fps: (values.required_fps ?? "").trim() || null,
+      average_cps: (values.average_cps ?? "").trim() || null,
+      technical_notes: (values.technical_notes ?? "").trim() || null,
+    };
+    if (impossible && Object.entries(technical).some(([key, value]) => value !== null && value.length > (key === "technical_notes" ? 2000 : 120))) {
+      throw new Error("Technical field exceeds its maximum length.");
+    }
+
     const { error: saveError } = await supabase.rpc("admin_save_level", {
       p_list_id: listId,
       p_level_id: levelId || null,
@@ -1100,6 +1126,14 @@ export default function AdminPage() {
         chosen_length: values.level_length.trim(),
       });
       if (metricsError) throw new Error("CPS / Length: " + metricsError.message);
+    }
+
+    if (impossible) {
+      const { error: technicalError } = await supabase.rpc("admin_set_ill_technical", {
+        target_level_id: savedId,
+        chosen_technical: technical,
+      });
+      if (technicalError) throw new Error("Technical requirements: " + technicalError.message);
     }
 
     // Song is available on ALL four lists, including Impossible and Future.
@@ -1833,7 +1867,7 @@ export default function AdminPage() {
               {(activeList?.slug === "demon" || activeList?.slug === "challenge" || isImpossibleList) && (
                 <div className="grid gap-3 sm:grid-cols-2">
                   {isImpossibleList && (
-                    <Field label="CPS">
+                    <Field label="PEAK CPS">
                       <input type="text" maxLength={120}
                         value={form.cps}
                         onChange={(event) => updateField("cps", event.target.value)}
@@ -1848,6 +1882,28 @@ export default function AdminPage() {
                       maxLength={80}
                       className={inputClass} disabled={!canManage || busy} />
                   </Field>
+                </div>
+              )}
+
+              {isImpossibleList && (
+                <div className="rounded-xl border border-orange-500/25 bg-[#141419] p-5">
+                  <h3 className="mb-2 text-xl font-black">Technical Requirements</h3>
+                  <p className="mb-4 text-xs text-gray-400">Enter the verified setup. Leave unknown values blank.</p>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <Field label="REQUIRED TPS">
+                      <input value={form.required_tps} onChange={(event) => updateField("required_tps", event.target.value)} placeholder="e.g. 3000" maxLength={120} className={inputClass} disabled={!canManage || busy} />
+                    </Field>
+                    <Field label="REQUIRED FPS">
+                      <input value={form.required_fps} onChange={(event) => updateField("required_fps", event.target.value)} placeholder="e.g. 3000" maxLength={120} className={inputClass} disabled={!canManage || busy} />
+                    </Field>
+                    <Field label="AVERAGE CPS">
+                      <input value={form.average_cps} onChange={(event) => updateField("average_cps", event.target.value)} placeholder="e.g. 25" maxLength={120} className={inputClass} disabled={!canManage || busy} />
+                    </Field>
+
+                    <Field label="TECHNICAL NOTES">
+                      <textarea value={form.technical_notes} onChange={(event) => updateField("technical_notes", event.target.value)} placeholder="Additional settings or requirements" maxLength={2000} className={inputClass} disabled={!canManage || busy} />
+                    </Field>
+                  </div>
                 </div>
               )}
 
