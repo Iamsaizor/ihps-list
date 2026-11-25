@@ -1423,6 +1423,7 @@ export default function AdminPage() {
         await supabase.rpc(
           "admin_reorder_levels",
           {
+            p_moved_id: sourceId,
             p_list_id:
               activeListId,
 
