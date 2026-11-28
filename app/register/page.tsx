@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 const field =
-  "w-full rounded-lg border border-white/15 bg-[#101014] px-4 py-3 text-white outline-none focus:border-orange-500";
+  "w-full rounded-lg border border-white/15 bg-[#101014] px-4 py-3 text-white outline-none focus:border-ihps-500";
 
 function safeNext(value: string | null) {
   return value?.startsWith("/") &&
@@ -90,7 +90,7 @@ function RegisterPageContent() {
       <div className="mx-auto max-w-md rounded-2xl border border-white/10 bg-[#1b1b20] p-7 shadow-xl">
         <Link
           href="/"
-          className="text-3xl font-black text-orange-500"
+          className="text-3xl font-black text-ihps-500"
         >
           ihPS
         </Link>
@@ -118,7 +118,7 @@ function RegisterPageContent() {
             </p>
 
             <Link
-              className="mt-4 inline-block font-bold text-orange-400 underline"
+              className="mt-4 inline-block font-bold text-ihps-400 underline"
               href={`/login?next=${encodeURIComponent(next)}`}
             >
               Go to login →
@@ -188,7 +188,7 @@ function RegisterPageContent() {
 
             <button
               disabled={busy}
-              className="w-full rounded-lg bg-orange-500 px-4 py-3 font-extrabold disabled:opacity-50"
+              className="w-full rounded-lg bg-ihps-500 px-4 py-3 font-extrabold disabled:opacity-50"
             >
               {busy ? "CREATING ACCOUNT..." : "CREATE ACCOUNT"}
             </button>
@@ -198,7 +198,7 @@ function RegisterPageContent() {
         <p className="mt-5 text-sm text-gray-400">
           Already have an account?{" "}
           <Link
-            className="font-bold text-orange-400 underline"
+            className="font-bold text-ihps-400 underline"
             href={`/login?next=${encodeURIComponent(next)}`}
           >
             Log in

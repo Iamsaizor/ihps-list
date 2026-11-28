@@ -131,7 +131,7 @@ const inputClass =
   "w-full rounded-lg border border-white/10 " +
   "bg-[#101014] px-4 py-3 text-sm text-white " +
   "outline-none placeholder:text-gray-600 " +
-  "focus:border-orange-500 disabled:opacity-50";
+  "focus:border-ihps-500 disabled:opacity-50";
 
 const buttonClass =
   "rounded-lg px-4 py-2 text-sm font-bold transition " +
@@ -322,7 +322,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="mb-2 block text-xs font-bold tracking-wide text-orange-500">
+      <label className="mb-2 block text-xs font-bold tracking-wide text-ihps-500">
         {label}
 
         {required && (
@@ -1475,7 +1475,7 @@ export default function AdminPage() {
     return (
       <main className="flex min-h-screen items-center justify-center bg-[#101014] p-6 text-white">
         <div className="rounded-xl border border-white/10 bg-[#1b1b20] p-8 text-center">
-          <h1 className="text-3xl font-black text-orange-500">
+          <h1 className="text-3xl font-black text-ihps-500">
             ihPS ADMIN
           </h1>
 
@@ -1485,7 +1485,7 @@ export default function AdminPage() {
 
           <a
             href="/login"
-            className="mt-6 inline-block rounded-lg bg-orange-500 px-6 py-3 font-bold"
+            className="mt-6 inline-block rounded-lg bg-ihps-500 px-6 py-3 font-bold"
           >
             SIGN IN
           </a>
@@ -1508,7 +1508,7 @@ export default function AdminPage() {
 
         <header className="mb-7 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5">
           <div>
-            <p className="text-xs font-bold tracking-[0.3em] text-orange-500">
+            <p className="text-xs font-bold tracking-[0.3em] text-ihps-500">
               ihPS
             </p>
 
@@ -1547,7 +1547,7 @@ export default function AdminPage() {
         ==================================================== */}
 
         <section className="mb-5 rounded-xl border border-white/10 bg-[#1b1b20] p-4">
-          <p className="mb-3 text-xs font-bold tracking-widest text-orange-500">
+          <p className="mb-3 text-xs font-bold tracking-widest text-ihps-500">
             SELECT LIST
           </p>
 
@@ -1559,7 +1559,7 @@ export default function AdminPage() {
                 onClick={() => switchList(list.id)}
                 className={`${buttonClass} ${
                   activeListId === list.id
-                    ? "bg-orange-500 text-white"
+                    ? "bg-ihps-500 text-white"
                     : "bg-[#29292f] text-gray-400 hover:text-white"
                 }`}
               >
@@ -1615,7 +1615,7 @@ export default function AdminPage() {
 
             <div className="mb-6 flex items-center justify-between">
               <div>
-                <p className="text-xs font-bold tracking-widest text-orange-500">
+                <p className="text-xs font-bold tracking-widest text-ihps-500">
                   LEVEL EDITOR
                 </p>
 
@@ -1638,8 +1638,8 @@ export default function AdminPage() {
             </div>
 
             {editingLevel && (
-              <div className="mb-5 rounded-lg border border-orange-500/20 bg-orange-500/5 p-4">
-                <p className="text-xs font-bold text-orange-400">
+              <div className="mb-5 rounded-lg border border-ihps-500/20 bg-ihps-500/5 p-4">
+                <p className="text-xs font-bold text-ihps-400">
                   CURRENTLY EDITING
                 </p>
 
@@ -1832,7 +1832,7 @@ export default function AdminPage() {
 
               {/* IMPOSSIBLE LIST WORLD RECORD */}
               {isImpossibleList && (
-                <div className="rounded-xl border border-orange-500/25 bg-[#141419] p-5">
+                <div className="rounded-xl border border-ihps-500/25 bg-[#141419] p-5">
                   <h3 className="mb-2 text-xl font-black">World Record (WR)</h3>
                   <p className="mb-4 text-xs text-gray-400">
                     Enter the player and their best percentage. Leave both blank if there is no record.
@@ -1887,7 +1887,7 @@ export default function AdminPage() {
               )}
 
               {isImpossibleList && (
-                <div className="rounded-xl border border-orange-500/25 bg-[#141419] p-5">
+                <div className="rounded-xl border border-ihps-500/25 bg-[#141419] p-5">
                   <h3 className="mb-2 text-xl font-black">Technical Requirements</h3>
                   <p className="mb-4 text-xs text-gray-400">Enter the verified setup. Leave unknown values blank.</p>
                   <div className="grid gap-3 sm:grid-cols-2">
@@ -1964,7 +1964,7 @@ export default function AdminPage() {
               <div className="rounded-xl border border-white/10 bg-[#141419] p-5">
 
                 <div className="mb-4">
-                  <p className="text-[11px] font-bold tracking-widest text-orange-500">
+                  <p className="text-[11px] font-bold tracking-widest text-ihps-500">
                     LEVEL MEDIA
                   </p>
 
@@ -1982,7 +1982,7 @@ export default function AdminPage() {
                 {/* UPLOAD AREA */}
 
                 <label
-                  className={`flex items-center justify-center rounded-lg border-2 border-dashed border-white/20 bg-[#101014] px-5 py-8 text-center transition hover:border-orange-500/50 ${
+                  className={`flex items-center justify-center rounded-lg border-2 border-dashed border-white/20 bg-[#101014] px-5 py-8 text-center transition hover:border-ihps-500/50 ${
                     uploadingImage ||
                     busy ||
                     !canManage
@@ -2026,7 +2026,7 @@ export default function AdminPage() {
                 {form.image_url && (
                   <div className="mt-5">
 
-                    <p className="mb-3 text-xs font-bold text-orange-500">
+                    <p className="mb-3 text-xs font-bold text-ihps-500">
                       CURRENT IMAGE
                     </p>
 
@@ -2091,11 +2091,11 @@ export default function AdminPage() {
                   LIST PERCENTAGE
               ============================================== */}
 
-              {!isImpossibleList && !isFutureList && activeList?.slug !== "challenge" && <div className="rounded-xl border border-orange-500/25 bg-[#141419] p-5">
+              {!isImpossibleList && !isFutureList && activeList?.slug !== "challenge" && <div className="rounded-xl border border-ihps-500/25 bg-[#141419] p-5">
 
                 <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                   <div>
-                    <p className="text-[11px] font-bold tracking-widest text-orange-500">
+                    <p className="text-[11px] font-bold tracking-widest text-ihps-500">
                       RECORD REQUIREMENTS
                     </p>
 
@@ -2104,7 +2104,7 @@ export default function AdminPage() {
                     </h3>
                   </div>
 
-                  <span className="rounded-md border border-orange-500/30 bg-orange-500/10 px-3 py-1 text-[10px] font-black text-orange-400">
+                  <span className="rounded-md border border-ihps-500/30 bg-ihps-500/10 px-3 py-1 text-[10px] font-black text-ihps-400">
                     PLACER-CHOSEN
                   </span>
                 </div>
@@ -2134,7 +2134,7 @@ export default function AdminPage() {
                     disabled={!canManage || busy}
                   />
 
-                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xl font-black text-orange-500">
+                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xl font-black text-ihps-500">
                     %
                   </span>
                 </div>
@@ -2153,7 +2153,7 @@ export default function AdminPage() {
 
                 <div className="mb-4 flex items-center justify-between gap-3">
                   <div>
-                    <p className="text-[11px] font-bold tracking-widest text-orange-500">
+                    <p className="text-[11px] font-bold tracking-widest text-ihps-500">
                       GAMEPLAY CLASSIFICATION
                     </p>
 
@@ -2181,7 +2181,7 @@ export default function AdminPage() {
                         disabled={
                           !canManage || busy
                         }
-                        className="rounded-md border border-orange-500/40 bg-orange-500/15 px-2.5 py-1 text-xs font-bold text-orange-300"
+                        className="rounded-md border border-ihps-500/40 bg-ihps-500/15 px-2.5 py-1 text-xs font-bold text-ihps-300"
                       >
                         {tag.name} ×
                       </button>
@@ -2212,7 +2212,7 @@ export default function AdminPage() {
                           event.target.checked
                         )
                       }
-                      className="accent-orange-500"
+                      className="accent-ihps-500"
                     />
 
                     Show selected only
@@ -2241,8 +2241,8 @@ export default function AdminPage() {
                       <div key={group.name}>
 
                         {group.name === "ILL EXCLUSIVE" && isImpossibleList && (
-                          <div className="mb-4 rounded-lg border border-orange-500/40 bg-orange-500/10 p-3">
-                            <p className="text-sm font-bold text-orange-400">
+                          <div className="mb-4 rounded-lg border border-ihps-500/40 bg-ihps-500/10 p-3">
+                            <p className="text-sm font-bold text-ihps-400">
                               ⚠ IMPOSSIBLE LIST EXCLUSIVE
                             </p>
                             <p className="mt-1 text-xs leading-relaxed text-gray-300">
@@ -2252,7 +2252,7 @@ export default function AdminPage() {
                           </div>
                         )}
 
-                        <h4 className="mb-3 border-b border-white/10 pb-2 text-[11px] font-black tracking-widest text-orange-500">
+                        <h4 className="mb-3 border-b border-white/10 pb-2 text-[11px] font-black tracking-widest text-ihps-500">
                           {group.name}
                         </h4>
 
@@ -2312,8 +2312,8 @@ export default function AdminPage() {
                                   }
                                   className={`rounded-md border px-3 py-2 text-xs font-bold transition ${
                                     selected
-                                      ? "border-orange-500 bg-orange-500/20 text-orange-300"
-                                      : "border-white/15 bg-[#25252b] text-gray-300 hover:border-orange-500/50"
+                                      ? "border-ihps-500 bg-ihps-500/20 text-ihps-300"
+                                      : "border-white/15 bg-[#25252b] text-gray-300 hover:border-ihps-500/50"
                                   }`}
                                 >
                                   {selected
@@ -2370,7 +2370,7 @@ export default function AdminPage() {
                   uploadingImage ||
                   checkingPermission
                 }
-                className={`${buttonClass} w-full bg-orange-500 py-4 text-base font-black hover:bg-orange-600`}
+                className={`${buttonClass} w-full bg-ihps-500 py-4 text-base font-black hover:bg-ihps-600`}
               >
                 {uploadingImage
                   ? "UPLOADING IMAGE..."
@@ -2392,7 +2392,7 @@ export default function AdminPage() {
 
             <div className="mb-5 flex items-center justify-between gap-3">
               <div>
-                <p className="text-xs font-bold tracking-widest text-orange-500">
+                <p className="text-xs font-bold tracking-widest text-ihps-500">
                   RANKING MANAGER
                 </p>
 
@@ -2512,9 +2512,9 @@ export default function AdminPage() {
                     }}
                     className={`rounded-xl border p-4 transition ${
                       dragOverId === level.id
-                        ? "border-orange-500 bg-orange-500/10"
+                        ? "border-ihps-500 bg-ihps-500/10"
                         : editingId === level.id
-                        ? "border-orange-500/50 bg-orange-500/5"
+                        ? "border-ihps-500/50 bg-ihps-500/5"
                         : "border-white/10 bg-[#242429]"
                     } ${
                       canManage &&
@@ -2528,7 +2528,7 @@ export default function AdminPage() {
 
                       {/* RANK */}
 
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#111115] text-lg font-black text-orange-500">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#111115] text-lg font-black text-ihps-500">
                         #{level.position}
                       </div>
 
@@ -2566,7 +2566,7 @@ export default function AdminPage() {
 
                         {isImpossibleList && (
                           <p className="mt-2 text-xs text-gray-300">
-                            <span className="font-bold text-orange-400">WR: </span>
+                            <span className="font-bold text-ihps-400">WR: </span>
                             {level.wr_user && level.wr_percent != null
                               ? `${level.wr_user} — ${level.wr_percent}%`
                               : "No record"}
@@ -2578,7 +2578,7 @@ export default function AdminPage() {
                         {isFutureList && (
                           <div className="mt-3 flex flex-wrap gap-2">
 
-                            <span className="rounded-md border border-orange-500/30 bg-orange-500/10 px-2 py-1 text-xs font-bold text-orange-300">
+                            <span className="rounded-md border border-ihps-500/30 bg-ihps-500/10 px-2 py-1 text-xs font-bold text-ihps-300">
                               Future Rank: #{level.position}
                             </span>
 
@@ -2665,7 +2665,7 @@ export default function AdminPage() {
                         disabled={
                           !canManage || busy
                         }
-                        className={`${buttonClass} flex-1 bg-orange-500/10 text-orange-400`}
+                        className={`${buttonClass} flex-1 bg-ihps-500/10 text-ihps-400`}
                       >
                         EDIT
                       </button>
@@ -2710,7 +2710,7 @@ export default function AdminPage() {
             {/* ILL EXPLANATION */}
 
             {isImpossibleList && (
-              <p className="mt-5 text-xs text-orange-400">
+              <p className="mt-5 text-xs text-ihps-400">
                 ILL-exclusive gameplay tags are
                 available in the tag editor.
               </p>
@@ -2722,7 +2722,7 @@ export default function AdminPage() {
 
       {/* FLOATING BULK SAVE CONTROLS */}
       {(Object.keys(drafts).length > 0 || editingId !== null) && canManage && (
-        <div className="fixed bottom-5 right-5 z-[900] w-[min(380px,calc(100vw-40px))] rounded-xl border border-orange-500/50 bg-[#19191f]/95 p-4 shadow-2xl backdrop-blur-md">
+        <div className="fixed bottom-5 right-5 z-[900] w-[min(380px,calc(100vw-40px))] rounded-xl border border-ihps-500/50 bg-[#19191f]/95 p-4 shadow-2xl backdrop-blur-md">
           <div className="mb-3 flex items-center justify-between gap-2">
             <div>
               <p className="text-sm font-black text-white">BULK EDITING</p>
@@ -2731,17 +2731,17 @@ export default function AdminPage() {
                 {editingId ? " · current editor included on save" : ""}
               </p>
             </div>
-            <span className="rounded bg-orange-500/15 px-2 py-1 text-xs font-bold text-orange-300">
+            <span className="rounded bg-ihps-500/15 px-2 py-1 text-xs font-bold text-ihps-300">
               UNSAVED
             </span>
           </div>
-          {saveAllProgress && <p className="mb-2 text-xs text-orange-300">{saveAllProgress}</p>}
+          {saveAllProgress && <p className="mb-2 text-xs text-ihps-300">{saveAllProgress}</p>}
           <div className="flex gap-2">
             <button
               type="button"
               onClick={() => void saveAllChanges()}
               disabled={busy || uploadingImage}
-              className={`${buttonClass} flex-1 bg-orange-500 text-white hover:bg-orange-600`}
+              className={`${buttonClass} flex-1 bg-ihps-500 text-white hover:bg-ihps-600`}
             >
               {busy ? "SAVING..." : "SAVE ALL CHANGES"}
             </button>

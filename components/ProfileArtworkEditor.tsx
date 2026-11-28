@@ -48,15 +48,15 @@ export function ProfileArtworkEditor({ userId }: { userId: string }) {
     <h2 className="text-xl font-extrabold">PROFILE BANNER & BACKGROUND</h2>
     <p className="mt-1 text-sm text-gray-400">Customize the artwork on your public player page. PNG, JPG or WebP · 5 MB maximum.</p>
     {(["banner","background"] as const).map(kind => <div key={kind} className="mt-5 rounded-lg border border-white/10 bg-[#101014] p-4">
-      <div className="flex items-center justify-between gap-2"><h3 className="font-bold uppercase text-orange-400">{kind}</h3><button type="button" disabled={busy!==null} onClick={()=>void update(kind,null)} className="text-xs font-bold text-gray-300 underline disabled:opacity-40">Remove</button></div>
+      <div className="flex items-center justify-between gap-2"><h3 className="font-bold uppercase text-ihps-400">{kind}</h3><button type="button" disabled={busy!==null} onClick={()=>void update(kind,null)} className="text-xs font-bold text-gray-300 underline disabled:opacity-40">Remove</button></div>
       <div className="mt-3 overflow-hidden rounded-lg border border-white/10 bg-[#24242b]" style={{aspectRatio:kind==="banner"?"3 / 1":"16 / 7"}}>{safeImage(art[`${kind}_url`])?<img src={art[`${kind}_url`]!} alt={`${kind} preview`} className="h-full w-full object-cover"/>:<div className="flex h-full items-center justify-center text-sm text-gray-400">No {kind} selected</div>}</div>
-      <input aria-label={`Upload ${kind}`} type="file" accept="image/png,image/jpeg,image/webp" disabled={busy!==null} className="mt-3 block w-full text-sm text-gray-300 file:mr-3 file:rounded-lg file:border-0 file:bg-orange-500 file:px-3 file:py-2 file:font-bold file:text-white" onChange={e=>{const file=e.target.files?.[0];e.target.value="";void upload(kind,file);}}/>
+      <input aria-label={`Upload ${kind}`} type="file" accept="image/png,image/jpeg,image/webp" disabled={busy!==null} className="mt-3 block w-full text-sm text-gray-300 file:mr-3 file:rounded-lg file:border-0 file:bg-ihps-500 file:px-3 file:py-2 file:font-bold file:text-white" onChange={e=>{const file=e.target.files?.[0];e.target.value="";void upload(kind,file);}}/>
       <ArtworkUrlInput key={`${kind}-${art[`${kind}_url`]??""}`} kind={kind} initial={art[`${kind}_url`]??""} disabled={busy!==null} onSave={url=>void update(kind,url)}/>
     </div>)}
-    {busy&&<p className="mt-3 text-sm text-orange-400">Saving {busy}...</p>}{message&&<p role="status" className="mt-3 text-sm text-gray-200">{message}</p>}
+    {busy&&<p className="mt-3 text-sm text-ihps-400">Saving {busy}...</p>}{message&&<p role="status" className="mt-3 text-sm text-gray-200">{message}</p>}
   </section>;
 }
 function ArtworkUrlInput({kind,initial,disabled,onSave}:{kind:Kind;initial:string;disabled:boolean;onSave:(url:string)=>void}) {
   const [value,setValue]=useState(initial);
-  return <div className="mt-3 flex flex-col gap-2 sm:flex-row"><input aria-label={`${kind} HTTPS image URL`} type="url" value={value} onChange={e=>setValue(e.target.value)} placeholder="https://... (direct image link)" className="min-w-0 flex-1 rounded-lg border border-white/15 bg-[#202027] px-3 py-2 text-sm text-white"/><button type="button" disabled={disabled||!safeImage(value)} onClick={()=>onSave(value.trim())} className="rounded-lg bg-orange-500 px-4 py-2 text-sm font-bold disabled:opacity-40">Save URL</button></div>;
+  return <div className="mt-3 flex flex-col gap-2 sm:flex-row"><input aria-label={`${kind} HTTPS image URL`} type="url" value={value} onChange={e=>setValue(e.target.value)} placeholder="https://... (direct image link)" className="min-w-0 flex-1 rounded-lg border border-white/15 bg-[#202027] px-3 py-2 text-sm text-white"/><button type="button" disabled={disabled||!safeImage(value)} onClick={()=>onSave(value.trim())} className="rounded-lg bg-ihps-500 px-4 py-2 text-sm font-bold disabled:opacity-40">Save URL</button></div>;
 }

@@ -54,7 +54,7 @@ const descriptions:Record<string,string>={
 export function PlayerTagBadge({tag}:{tag:string|null|undefined}){
  if(!tag)return null;
  const special=tag==="Omni-Slayer";
- return <span className={`inline-block rounded border px-2 py-1 text-xs font-black tracking-wide ${special?"border-purple-400/60 bg-purple-500/15 text-purple-300":"border-orange-500/40 bg-orange-500/10 text-orange-300"}`}>{tag.toUpperCase()}</span>;
+ return <span className={`inline-block rounded border px-2 py-1 text-xs font-black tracking-wide ${special?"border-purple-400/60 bg-purple-500/15 text-purple-300":"border-ihps-500/40 bg-ihps-500/10 text-ihps-300"}`}>{tag.toUpperCase()}</span>;
 }
 export function usePlayerTags(userId:string|null|undefined){
  const [tags,setTags]=useState<TagRow[]>([]);
@@ -91,15 +91,15 @@ export function PlayerTagSelector({userId}:{userId:string}){
   {visibleCategories.length===0?
    <p className="mt-4 rounded-lg border border-white/10 bg-[#111115] p-4 text-sm text-gray-400">You don&apos;t currently have any unlocked tags. They&apos;ll appear here automatically when you qualify.</p>
    :<div className="mt-4 space-y-5">{visibleCategories.map(({category,names})=><div key={category}>
-    <h3 className="mb-2 text-sm font-black text-orange-400">{category.toUpperCase()}</h3>
+    <h3 className="mb-2 text-sm font-black text-ihps-400">{category.toUpperCase()}</h3>
     <div className="space-y-2">{names.map(name=><div key={name} className="flex items-center justify-between gap-3 rounded-lg border border-white/10 bg-[#111115] p-3">
      <div className="group relative min-w-0" title={descriptions[name]??name} tabIndex={0} aria-label={`${name}: ${descriptions[name]??name}`}>
       <p className="cursor-help font-semibold text-white decoration-dotted underline-offset-4 group-hover:underline group-focus:underline">{name}</p>
-      <div role="tooltip" className="pointer-events-none absolute bottom-full left-0 z-30 mb-2 hidden w-max max-w-[min(270px,70vw)] rounded-lg border border-orange-500/40 bg-[#25252d] px-3 py-2 text-xs font-normal leading-relaxed text-gray-100 shadow-xl group-hover:block group-focus:block">
+      <div role="tooltip" className="pointer-events-none absolute bottom-full left-0 z-30 mb-2 hidden w-max max-w-[min(270px,70vw)] rounded-lg border border-ihps-500/40 bg-[#25252d] px-3 py-2 text-xs font-normal leading-relaxed text-gray-100 shadow-xl group-hover:block group-focus:block">
        {descriptions[name]??"Currently eligible for this tag"}
       </div>
      </div>
-     <button type="button" disabled={busy||equipped===name} onClick={()=>void equip(name)} className="shrink-0 rounded bg-orange-500 px-3 py-2 text-xs font-bold text-black disabled:bg-[#303039] disabled:text-gray-500">{equipped===name?"EQUIPPED":"EQUIP"}</button>
+     <button type="button" disabled={busy||equipped===name} onClick={()=>void equip(name)} className="shrink-0 rounded bg-ihps-500 px-3 py-2 text-xs font-bold text-black disabled:bg-[#303039] disabled:text-gray-500">{equipped===name?"EQUIPPED":"EQUIP"}</button>
     </div>)}</div>
    </div>)}</div>}
   <button type="button" disabled={busy||!equipped} onClick={()=>void equip(null)} className="mt-4 rounded border border-white/20 px-4 py-2 text-sm font-bold disabled:opacity-40">UNEQUIP</button>

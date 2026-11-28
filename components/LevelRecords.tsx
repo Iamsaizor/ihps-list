@@ -93,7 +93,7 @@ export default function LevelRecords({ levelId, worldRecordOnly = false }: { lev
           value={search}
           onChange={(event) => { setSearch(event.target.value); setPage(1); }}
           placeholder="⌕  Search players..."
-          className="w-full rounded-lg border border-white/10 bg-[#101014] px-4 py-3 text-sm text-white outline-none placeholder:text-gray-500 focus:border-orange-500"
+          className="w-full rounded-lg border border-white/10 bg-[#101014] px-4 py-3 text-sm text-white outline-none placeholder:text-gray-500 focus:border-ihps-500"
         />
       </label>
       {loading && records.length === 0 && <p className="mt-4 text-sm text-gray-400">Loading records...</p>}
@@ -108,14 +108,14 @@ export default function LevelRecords({ levelId, worldRecordOnly = false }: { lev
               <span className="shrink-0 text-2xl" title={record.country_code || "No country selected"}>{flag(record.country_code)}</span>
               <div className="min-w-0 flex-1">
                 {record.username ? (
-                  <Link href={`/players/${encodeURIComponent(record.username)}`} className="block truncate text-sm font-semibold text-white hover:text-orange-400 hover:underline">{name}</Link>
+                  <Link href={`/players/${encodeURIComponent(record.username)}`} className="block truncate text-sm font-semibold text-white hover:text-ihps-400 hover:underline">{name}</Link>
                 ) : <span className="block truncate text-sm font-semibold">{name}</span>}
                 <div className="mt-0.5 text-xs text-gray-400">
-                  <span className="font-bold text-orange-400">{Number(record.percent).toLocaleString(undefined, { maximumFractionDigits: 2 })}%</span>
+                  <span className="font-bold text-ihps-400">{Number(record.percent).toLocaleString(undefined, { maximumFractionDigits: 2 })}%</span>
                   {record.accepted_at && <span className="ml-2">{new Date(record.accepted_at).toLocaleDateString()}</span>}
                 </div>
               </div>
-              {videoUrl && <a href={videoUrl} target="_blank" rel="noopener noreferrer" title="Watch completion" aria-label={`Watch ${name}'s completion`} className="shrink-0 rounded-lg bg-white/10 px-3 py-2 text-sm font-bold text-white hover:bg-orange-500">▶</a>}
+              {videoUrl && <a href={videoUrl} target="_blank" rel="noopener noreferrer" title="Watch completion" aria-label={`Watch ${name}'s completion`} className="shrink-0 rounded-lg bg-white/10 px-3 py-2 text-sm font-bold text-white hover:bg-ihps-500">▶</a>}
             </div>
           );
         })}
@@ -123,7 +123,7 @@ export default function LevelRecords({ levelId, worldRecordOnly = false }: { lev
       </div>}
       {filtered.length > PAGE_SIZE && <div className="mt-4 flex items-center justify-center gap-2 text-sm">
         <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="rounded-md bg-[#29292f] px-3 py-2 disabled:opacity-40">Previous</button>
-        <span className="rounded-md bg-orange-500 px-3 py-2 font-bold">{page} / {totalPages}</span>
+        <span className="rounded-md bg-ihps-500 px-3 py-2 font-bold">{page} / {totalPages}</span>
         <button type="button" disabled={page >= totalPages} onClick={() => setPage((p) => p + 1)} className="rounded-md bg-[#29292f] px-3 py-2 disabled:opacity-40">Next</button>
       </div>}
     </div>

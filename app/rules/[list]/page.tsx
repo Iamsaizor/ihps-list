@@ -181,32 +181,32 @@ export default async function RulesPage({ params }: { params: Promise<{ list: st
     <main className="min-h-screen bg-[#101014] text-white">
       <header className="border-b border-[#303036] bg-[#17171b]">
         <div className="mx-auto flex max-w-[980px] items-center justify-between px-4 py-3">
-          <Link href="/" className="text-[28px] font-black tracking-tight text-[#ff7900]">ihPS</Link>
-          <Link href="/" className="rounded-md border border-[#45454d] bg-[#27272d] px-4 py-2 text-xs font-bold transition hover:border-[#ff7900]">← Back to Lists</Link>
+          <Link href="/" className="text-[28px] font-black tracking-tight text-[#6089C9]">ihPS</Link>
+          <Link href="/" className="rounded-md border border-[#45454d] bg-[#27272d] px-4 py-2 text-xs font-bold transition hover:border-[#6089C9]">← Back to Lists</Link>
         </div>
       </header>
       <div className="mx-auto max-w-[1200px] px-4 pb-20 pt-10 sm:px-6">
         <div className="mb-7">
-          <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[.22em] text-[#ff7900]">IHPS · LIST GUIDELINES</p>
+          <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[.22em] text-[#6089C9]">IHPS · LIST GUIDELINES</p>
           <h1 className="text-3xl font-black tracking-tight sm:text-4xl">{data.title}</h1>
           <p className="mt-2 text-sm text-[#a9bacf]">{data.subtitle}</p>
         </div>
         <nav aria-label="Choose a list's rules" className="mb-7 flex flex-wrap gap-2">
           {links.map(({ slug, label }) => (
             <Link key={slug} href={`/rules/${slug}`} aria-current={slug === list ? "page" : undefined}
-              className={`rounded-md border px-3 py-2 text-xs font-bold transition ${slug === list ? "border-[#ff7900] bg-[#ff7900] text-white" : "border-[#45454d] bg-[#26262c] text-white hover:border-[#ff7900]"}`}>
+              className={`rounded-md border px-3 py-2 text-xs font-bold transition ${slug === list ? "border-[#6089C9] bg-[#6089C9] text-white" : "border-[#45454d] bg-[#26262c] text-white hover:border-[#6089C9]"}`}>
               {label}
             </Link>
           ))}
         </nav>
         <div className="grid items-start gap-5 lg:grid-cols-[245px_minmax(0,1fr)]">
           <aside className="rounded-xl border border-[#35353d] bg-[#1c1c21] p-5 lg:sticky lg:top-5">
-            <h2 className="mb-4 text-sm font-extrabold uppercase tracking-wider text-[#ff7900]">Table of Contents</h2>
+            <h2 className="mb-4 text-sm font-extrabold uppercase tracking-wider text-[#6089C9]">Table of Contents</h2>
             <nav aria-label="Page sections" className="flex flex-col gap-1">
               {data.sections.map((section, i) => (
                 <a key={section.heading} href={`#section-${i + 1}`}
-                  className="rounded-md px-2 py-2 text-sm text-[#c5c5cd] transition hover:bg-[#303037] hover:text-[#ff7900]">
-                  <span className="mr-2 font-bold text-[#ff7900]">{String(i + 1).padStart(2, "0")}</span>{section.heading}
+                  className="rounded-md px-2 py-2 text-sm text-[#c5c5cd] transition hover:bg-[#303037] hover:text-[#6089C9]">
+                  <span className="mr-2 font-bold text-[#6089C9]">{String(i + 1).padStart(2, "0")}</span>{section.heading}
                 </a>
               ))}
             </nav>
@@ -217,14 +217,14 @@ export default async function RulesPage({ params }: { params: Promise<{ list: st
                 className="mb-5 scroll-mt-6 overflow-hidden rounded-xl border border-[#35353d] bg-[#1c1c21]">
                 <div className="border-b border-[#35353d] bg-[#202026] px-5 py-4">
                   <h2 className="text-base font-black sm:text-lg">
-                    <span className="mr-3 text-[#ff7900]">{String(sectionIndex + 1).padStart(2, "0")}.</span>
+                    <span className="mr-3 text-[#6089C9]">{String(sectionIndex + 1).padStart(2, "0")}.</span>
                     {section.heading}
                   </h2>
                 </div>
                 <ol className="divide-y divide-[#35353d]">
                   {section.rules.map((item, index) => (
                     <li key={item.title} className="flex items-start gap-4 px-5 py-5">
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[#79400c] bg-[#2c231c] text-xs font-bold text-[#ff7900]">{index + 1}</span>
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[#36558A] bg-[#202b3c] text-xs font-bold text-[#6089C9]">{index + 1}</span>
                       <div>
                         <h3 className="text-sm font-bold text-white">{item.title}</h3>
                         <p className="mt-1 text-sm leading-6 text-[#d1d1d8]">{item.description}</p>

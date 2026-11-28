@@ -54,24 +54,24 @@ export default function StaffLoginPage() {
   return (
     <main className="min-h-screen bg-[#101014] text-white flex items-center justify-center p-5">
       <section className="w-full max-w-md rounded-xl border border-white/10 bg-[#1c1c21] p-8">
-        <Link href="/" className="text-3xl font-black text-[#ff7900]">ihPS</Link>
-        <p className="mt-6 text-xs font-bold tracking-widest text-[#ff7900]">AUTHORIZED PERSONNEL</p>
+        <Link href="/" className="text-3xl font-black text-[#6089C9]">ihPS</Link>
+        <p className="mt-6 text-xs font-bold tracking-widest text-[#6089C9]">AUTHORIZED PERSONNEL</p>
         <h1 className="mt-2 text-3xl font-black">FOUNDER LOGIN</h1>
         <p className="mt-2 text-sm text-gray-400">Sign in with an account authorized to manage ihPS staff.</p>
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <label className="block text-sm font-semibold">Email
             <input type="email" required autoComplete="username" value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-2 w-full rounded-lg border border-white/20 bg-[#101014] p-3 outline-none focus:border-orange-500" />
+              className="mt-2 w-full rounded-lg border border-white/20 bg-[#101014] p-3 outline-none focus:border-ihps-500" />
           </label>
           <label className="block text-sm font-semibold">Password
             <input type="password" required autoComplete="current-password" value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-2 w-full rounded-lg border border-white/20 bg-[#101014] p-3 outline-none focus:border-orange-500" />
+              className="mt-2 w-full rounded-lg border border-white/20 bg-[#101014] p-3 outline-none focus:border-ihps-500" />
           </label>
           {error && <p role="alert" className="rounded-lg border border-red-600 p-3 text-sm text-red-300">{error}</p>}
           <button type="submit" disabled={loading}
-            className="w-full rounded-lg bg-[#ff7900] px-4 py-3 font-black disabled:opacity-50">
+            className="w-full rounded-lg bg-[#6089C9] px-4 py-3 font-black disabled:opacity-50">
             {loading ? "CHECKING ACCESS..." : "SIGN IN"}
           </button>
         </form>

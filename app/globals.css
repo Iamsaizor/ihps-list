@@ -5,6 +5,14 @@
   --foreground: #171717;
 }
 
+@theme {
+  --color-ihps-300: #b4c9eb;
+  --color-ihps-400: #91b0e0;
+  --color-ihps-500: #6089c9;
+  --color-ihps-600: #4d73b3;
+  --color-ihps-950: #17263e;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -26,8 +34,8 @@ body {
 }
 
 /* Accent customization is scoped to public player profiles only. */
-.ihps-accent-profile .text-orange-400, .ihps-accent-profile .text-orange-500 { color: var(--ihps-accent); }
-.ihps-accent-profile .bg-orange-500 { background-color: var(--ihps-accent); }
-.ihps-accent-profile .border-orange-500 { border-color: var(--ihps-accent); }
-.ihps-accent-profile .border-orange-500\/40 { border-color: color-mix(in srgb, var(--ihps-accent) 40%, transparent); }
-.ihps-accent-profile .hover\:ring-orange-500:hover { --tw-ring-color: var(--ihps-accent); }
+.ihps-accent-profile .text-ihps-400, .ihps-accent-profile .text-ihps-500 { color: var(--ihps-accent); }
+.ihps-accent-profile .bg-ihps-500 { background-color: var(--ihps-accent); }
+.ihps-accent-profile .border-ihps-500 { border-color: var(--ihps-accent); }
+.ihps-accent-profile .border-ihps-500\/40 { border-color: color-mix(in srgb, var(--ihps-accent) 40%, transparent); }
+.ihps-accent-profile .hover\:ring-ihps-500:hover { --tw-ring-color: var(--ihps-accent); }

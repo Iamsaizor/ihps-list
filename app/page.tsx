@@ -199,7 +199,7 @@ function Stat({
 }) {
   return (
     <div className="border-r border-white/20 px-2 text-center">
-      <p className="mb-2 text-sm text-orange-500">
+      <p className="mb-2 text-sm text-ihps-500">
         {title}
       </p>
 
@@ -219,7 +219,7 @@ function DetailRow({
 }) {
   return (
     <div className="flex items-start gap-4">
-      <span className="w-24 shrink-0 text-orange-500">
+      <span className="w-24 shrink-0 text-ihps-500">
         {label}
       </span>
 
@@ -796,7 +796,7 @@ export default function Home() {
 
       <header className="relative z-40 border-b border-white/10 bg-[#17171b] px-4 py-3 lg:px-7">
         <div className="mx-auto flex max-w-[1900px] flex-wrap items-center gap-3 lg:gap-6">
-          <h1 className="mr-2 text-3xl font-black tracking-tight text-orange-500">ihPS</h1>
+          <h1 className="mr-2 text-3xl font-black tracking-tight text-ihps-500">ihPS</h1>
           <nav className="flex flex-wrap items-center gap-2" aria-label="Main navigation">
             <div className="relative" onClick={(event) => event.stopPropagation()} onMouseEnter={() => setOpenDropdown("demon")} onMouseLeave={() => setOpenDropdown(null)}>
               <button
@@ -804,7 +804,7 @@ export default function Home() {
                 aria-haspopup="menu"
                 aria-expanded={openDropdown === "demon"}
                 onClick={() => setOpenDropdown(openDropdown === "demon" ? null : "demon")}
-                className={`flex items-center gap-2 rounded-lg px-3 py-2.5 text-xs font-extrabold transition sm:px-4 sm:text-sm ${activeList === "demon" || activeList === "future-demon" ? "bg-orange-500 text-white" : "bg-[#29292f] text-gray-400 hover:text-white"}`}
+                className={`flex items-center gap-2 rounded-lg px-3 py-2.5 text-xs font-extrabold transition sm:px-4 sm:text-sm ${activeList === "demon" || activeList === "future-demon" ? "bg-ihps-500 text-white" : "bg-[#29292f] text-gray-400 hover:text-white"}`}
               >
                 DEMON LIST <span className="text-xs" aria-hidden="true">{openDropdown === "demon" ? "▴" : "▾"}</span>
               </button>
@@ -817,7 +817,7 @@ export default function Home() {
                         type="button"
                         role="menuitem"
                         onClick={() => changeList(slug)}
-                        className={`block w-full rounded-lg px-3 py-2.5 text-left text-sm font-bold transition ${activeList === slug ? "bg-orange-500/20 text-orange-400" : "text-gray-200 hover:bg-white/10 hover:text-white"}`}
+                        className={`block w-full rounded-lg px-3 py-2.5 text-left text-sm font-bold transition ${activeList === slug ? "bg-ihps-500/20 text-ihps-400" : "text-gray-200 hover:bg-white/10 hover:text-white"}`}
                       >
                         {slug === "demon" ? "DEMON LIST" : "FUTURE DEMON LIST"}
                       </button>
@@ -831,18 +831,18 @@ export default function Home() {
               if (!list) return null;
               const isActive = activeList === slug;
               return <button key={list.id} type="button" onClick={() => changeList(slug)}
-                className={`rounded-lg px-3 py-2.5 text-xs font-extrabold transition sm:px-4 sm:text-sm ${isActive ? "bg-orange-500 text-white" : "bg-[#29292f] text-gray-400 hover:text-white"}`}>
+                className={`rounded-lg px-3 py-2.5 text-xs font-extrabold transition sm:px-4 sm:text-sm ${isActive ? "bg-ihps-500 text-white" : "bg-[#29292f] text-gray-400 hover:text-white"}`}>
                 {slug === "challenge" ? "CHALLENGE LIST" : "IMPOSSIBLE LIST"}
               </button>;
             })}
             <Link href="/leaderboards" className="rounded-lg bg-[#29292f] px-3 py-2.5 text-xs font-extrabold text-gray-300 hover:text-white sm:px-4 sm:text-sm">LEADERBOARDS</Link>
             <Link href="/submit" className="rounded-lg bg-[#29292f] px-3 py-2.5 text-xs font-extrabold text-gray-300 hover:text-white sm:px-4 sm:text-sm">SUBMIT A RECORD</Link>
             {canAccessAdmin && (
-              <Link href="/admin/dashboard" className="rounded-lg bg-[#29292f] px-3 py-2.5 text-xs font-extrabold text-orange-400 transition hover:bg-[#36363f] hover:text-orange-300 sm:px-4 sm:text-sm">ADMIN DASHBOARD</Link>
+              <Link href="/admin/dashboard" className="rounded-lg bg-[#29292f] px-3 py-2.5 text-xs font-extrabold text-ihps-400 transition hover:bg-[#36363f] hover:text-ihps-300 sm:px-4 sm:text-sm">ADMIN DASHBOARD</Link>
             )}
           </nav>
           <div className="ml-auto flex items-center gap-2.5 sm:gap-3">
-            <a href="https://discord.gg/726ESqR3KZ" target="_blank" rel="noopener noreferrer" title="Join ihPS Discord" aria-label="Join ihPS Discord" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-500 text-white hover:bg-orange-600">
+            <a href="https://discord.gg/726ESqR3KZ" target="_blank" rel="noopener noreferrer" title="Join ihPS Discord" aria-label="Join ihPS Discord" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ihps-500 text-white hover:bg-ihps-600">
               <svg className="h-6 w-6" viewBox="0 0 127.14 96.36" fill="currentColor" aria-hidden="true"><path d="M104.4 8.54a102.6 102.6 0 0 0-25.4-7.9 71.9 71.9 0 0 0-3.25 6.7 95.5 95.5 0 0 0-28.6 0 71.8 71.8 0 0 0-3.3-6.7 102.7 102.7 0 0 0-25.4 7.9C2.4 32.5-1.9 55.8.3 78.8a103.2 103.2 0 0 0 31.2 15.7 76.2 76.2 0 0 0 6.7-10.9 66.8 66.8 0 0 1-10.5-5.1c.9-.6 1.7-1.3 2.5-1.9a73.2 73.2 0 0 0 66.8 0c.8.6 1.6 1.3 2.5 1.9a66.9 66.9 0 0 1-10.5 5.1 76 76 0 0 0 6.7 10.9 103 103 0 0 0 31.2-15.7c2.7-26.7-4.6-49.8-22.5-70.3ZM42.5 65.3c-6.1 0-11.1-5.6-11.1-12.4s4.9-12.4 11.1-12.4c6.2 0 11.2 5.6 11.1 12.4 0 6.8-4.9 12.4-11.1 12.4Zm42.1 0c-6.1 0-11.1-5.6-11.1-12.4s4.9-12.4 11.1-12.4c6.2 0 11.2 5.6 11.1 12.4 0 6.8-4.9 12.4-11.1 12.4Z"/></svg>
             </a>
             <NotificationBell />
@@ -868,7 +868,7 @@ export default function Home() {
       )}
 
       {pointsError && !isFutureList && (
-        <div className="mx-4 mt-4 rounded-lg border border-orange-500/30 bg-orange-950/30 p-4 text-orange-300">
+        <div className="mx-4 mt-4 rounded-lg border border-ihps-500/30 bg-ihps-950/30 p-4 text-ihps-300">
           Unable to load list points: {pointsError}
         </div>
       )}
@@ -900,7 +900,7 @@ export default function Home() {
         <aside className="min-w-0 rounded-xl border border-white/25 bg-[#1b1b20]/45 p-3 backdrop-blur-[2px]">
           <div className="mb-4 flex items-center justify-between gap-3">
             <h2 className="min-w-0 text-xl font-bold">{listLabel}</h2>
-            <Link href={`/rules/${activeList}`} className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-white/20 bg-[#29292f] px-3 py-2 text-xs font-bold text-gray-200 transition hover:border-orange-500/70 hover:bg-orange-500/10 hover:text-orange-300" aria-label={`View ${listLabel} rules`}>
+            <Link href={`/rules/${activeList}`} className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-white/20 bg-[#29292f] px-3 py-2 text-xs font-bold text-gray-200 transition hover:border-ihps-500/70 hover:bg-ihps-500/10 hover:text-ihps-300" aria-label={`View ${listLabel} rules`}>
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
               Rules
             </Link>
@@ -911,10 +911,10 @@ export default function Home() {
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search levels..."
-              className="min-w-0 flex-1 rounded-lg border border-white/10 bg-[#101014] p-3 text-sm outline-none focus:border-orange-500"
+              className="min-w-0 flex-1 rounded-lg border border-white/10 bg-[#101014] p-3 text-sm outline-none focus:border-ihps-500"
             />
             <button type="button" onClick={openFilters}
-              className={`shrink-0 rounded-lg border px-3 text-sm font-semibold transition ${activeFilterCount ? "border-orange-500 bg-orange-500/20 text-orange-300" : "border-white/20 bg-[#242429] text-gray-200 hover:border-orange-500"}`}>
+              className={`shrink-0 rounded-lg border px-3 text-sm font-semibold transition ${activeFilterCount ? "border-ihps-500 bg-ihps-500/20 text-ihps-300" : "border-white/20 bg-[#242429] text-gray-200 hover:border-ihps-500"}`}>
               ⚙ Filters{activeFilterCount ? ` (${activeFilterCount})` : ""}
             </button>
           </div>
@@ -925,7 +925,7 @@ export default function Home() {
               onClick={() =>
                 setSelectedTag(null)
               }
-              className="mb-3 w-full rounded-lg border border-orange-500/40 bg-orange-500/10 p-2 text-xs text-orange-400"
+              className="mb-3 w-full rounded-lg border border-ihps-500/40 bg-ihps-500/10 p-2 text-xs text-ihps-400"
             >
               Clear tag filter ×
             </button>
@@ -944,7 +944,7 @@ export default function Home() {
                 }}
                 className={`flex w-full items-center gap-4 rounded-md px-5 py-2.5 text-left transition ${
                   selectedId === level.id
-                    ? "bg-orange-500 text-white"
+                    ? "bg-ihps-500 text-white"
                     : "bg-[#242429] text-gray-200 hover:bg-[#34343b]"
                 }`}
               >
@@ -1055,19 +1055,19 @@ export default function Home() {
                 )}
 
                 {isImpossibleList && (
-                  <div className="mt-5 max-w-[760px] rounded-xl border border-orange-500/30 bg-[#1b1b20]/70 p-4">
+                  <div className="mt-5 max-w-[760px] rounded-xl border border-ihps-500/30 bg-[#1b1b20]/70 p-4">
                     <h3 className="text-lg font-extrabold text-white">World Record</h3>
                     {illWorldRecordLoading && !illWorldRecord ? (
                       <p className="mt-2 text-sm text-gray-400">Loading world record...</p>
                     ) : illWorldRecord ? (
                       <>
                         <p className="my-2 text-sm text-gray-200">
-                          <span className="font-bold text-orange-400">
+                          <span className="font-bold text-ihps-400">
                             {Number(illWorldRecord.percent).toLocaleString(undefined, { maximumFractionDigits: 4 })}%
                           </span>
                           {" — "}
                           {illWorldRecord.username ? (
-                            <Link href={`/players/${encodeURIComponent(illWorldRecord.username)}`} className="font-bold hover:text-orange-400 hover:underline">
+                            <Link href={`/players/${encodeURIComponent(illWorldRecord.username)}`} className="font-bold hover:text-ihps-400 hover:underline">
                               {illWorldRecord.display_name?.trim() || illWorldRecord.username}
                             </Link>
                           ) : (
@@ -1086,7 +1086,7 @@ export default function Home() {
                             />
                           </div>
                         ) : illWorldRecord.completion_url ? (
-                          <a href={illWorldRecord.completion_url} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-orange-400 hover:underline">
+                          <a href={illWorldRecord.completion_url} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-ihps-400 hover:underline">
                             Watch world record footage ↗
                           </a>
                         ) : null}
@@ -1137,8 +1137,8 @@ export default function Home() {
                         }
                         className={`rounded-md border px-2 py-1 text-sm transition ${
                           selectedTag === tag.id
-                            ? "border-orange-500 bg-orange-500/20 text-orange-300"
-                            : "border-gray-500 bg-[#222227]/80 hover:border-orange-500"
+                            ? "border-ihps-500 bg-ihps-500/20 text-ihps-300"
+                            : "border-gray-500 bg-[#222227]/80 hover:border-ihps-500"
                         }`}
                       >
                         {tag.name}
@@ -1169,7 +1169,7 @@ export default function Home() {
                         <Stat title="REQUIRED FPS" value={selectedLevel.required_fps || "—"} />
                         <Stat title="AVERAGE CPS" value={selectedLevel.average_cps || "—"} />
                       </div>
-                      {selectedLevel.technical_notes && <p className="mt-4 whitespace-pre-wrap break-words text-sm text-gray-200"><span className="font-bold text-orange-400">Technical notes: </span>{selectedLevel.technical_notes}</p>}
+                      {selectedLevel.technical_notes && <p className="mt-4 whitespace-pre-wrap break-words text-sm text-gray-200"><span className="font-bold text-ihps-400">Technical notes: </span>{selectedLevel.technical_notes}</p>}
                     </section>
                   </div>
                 ) : (
@@ -1332,11 +1332,11 @@ export default function Home() {
                     onClick={() =>
                       setHistoryOpen(!historyOpen)
                     }
-                    className="flex items-center gap-3 text-2xl font-bold hover:text-orange-400"
+                    className="flex items-center gap-3 text-2xl font-bold hover:text-ihps-400"
                   >
                     Position History
 
-                    <span className="text-lg text-orange-500">
+                    <span className="text-lg text-ihps-500">
                       {historyOpen ? "⌃" : "⌄"}
                     </span>
                   </button>
@@ -1433,7 +1433,7 @@ export default function Home() {
                     <div className="mb-2 flex flex-wrap gap-2">
                       {[["All", ""], ["Top 10", "10"], ["Top 25", "25"], ["Top 50", "50"]].map(([label, maximum]) => (
                         <button key={label} type="button" onClick={() => setDraftFilters((previous) => ({ ...previous, rankMin: "", rankMax: maximum }))}
-                          className={`rounded-md border px-2 py-1 text-xs ${draftFilters.rankMin === "" && draftFilters.rankMax === maximum ? "border-orange-500 text-orange-400" : "border-white/20 text-gray-300"}`}>{label}</button>
+                          className={`rounded-md border px-2 py-1 text-xs ${draftFilters.rankMin === "" && draftFilters.rankMax === maximum ? "border-ihps-500 text-ihps-400" : "border-white/20 text-gray-300"}`}>{label}</button>
                       ))}
                     </div>
                     <div className="flex gap-2">
@@ -1480,14 +1480,14 @@ export default function Home() {
                     if (!groupTags.length) return null;
                     return (
                       <div key={group}>
-                        <h4 className="mb-2 text-xs font-bold tracking-wider text-orange-400">{group}</h4>
+                        <h4 className="mb-2 text-xs font-bold tracking-wider text-ihps-400">{group}</h4>
                         <div className="flex flex-wrap gap-2">
                           {groupTags.map((tag) => {
                             const chosen = draftFilters.tagIds.includes(tag.id);
                             return (
                               <button type="button" key={tag.id} title={tag.description ?? tag.name}
                                 onClick={() => updateDraft("tagIds", chosen ? draftFilters.tagIds.filter((id) => id !== tag.id) : [...draftFilters.tagIds, tag.id])}
-                                className={`rounded-md border px-2 py-1.5 text-xs transition ${chosen ? "border-orange-500 bg-orange-500/20 text-orange-300" : "border-white/15 bg-[#242429] text-gray-300 hover:border-orange-500/50"}`}>
+                                className={`rounded-md border px-2 py-1.5 text-xs transition ${chosen ? "border-ihps-500 bg-ihps-500/20 text-ihps-300" : "border-white/15 bg-[#242429] text-gray-300 hover:border-ihps-500/50"}`}>
                                 {chosen ? "✓ " : ""}{tag.name}
                               </button>
                             );
@@ -1499,15 +1499,15 @@ export default function Home() {
                 </div>
                 <div className="mt-3 flex flex-wrap items-center gap-4 text-sm">
                   <span className="font-semibold">Tag matching:</span>
-                  <label className="flex items-center gap-2"><input type="radio" name="tag-match" checked={draftFilters.tagMode === "all"} onChange={() => updateDraft("tagMode", "all")} className="accent-orange-500" /> Match ALL</label>
-                  <label className="flex items-center gap-2"><input type="radio" name="tag-match" checked={draftFilters.tagMode === "any"} onChange={() => updateDraft("tagMode", "any")} className="accent-orange-500" /> Match ANY</label>
+                  <label className="flex items-center gap-2"><input type="radio" name="tag-match" checked={draftFilters.tagMode === "all"} onChange={() => updateDraft("tagMode", "all")} className="accent-ihps-500" /> Match ALL</label>
+                  <label className="flex items-center gap-2"><input type="radio" name="tag-match" checked={draftFilters.tagMode === "any"} onChange={() => updateDraft("tagMode", "any")} className="accent-ihps-500" /> Match ANY</label>
                 </div>
               </div>
             </div>
             <div className="mt-5 flex flex-wrap justify-end gap-2 border-t border-white/10 pt-4">
               <button type="button" onClick={() => { setDraftFilters({ ...EMPTY_FILTERS }); setFilters({ ...EMPTY_FILTERS }); setFiltersOpen(false); }} className="rounded-lg bg-red-600 px-4 py-2 text-sm font-bold">Reset All</button>
               <button type="button" onClick={() => setFiltersOpen(false)} className="rounded-lg bg-[#303036] px-4 py-2 text-sm font-bold">Cancel</button>
-              <button type="button" onClick={() => { setFilters({ ...draftFilters, tagIds: [...draftFilters.tagIds] }); setFiltersOpen(false); }} className="rounded-lg bg-orange-500 px-5 py-2 text-sm font-bold">Apply</button>
+              <button type="button" onClick={() => { setFilters({ ...draftFilters, tagIds: [...draftFilters.tagIds] }); setFiltersOpen(false); }} className="rounded-lg bg-ihps-500 px-5 py-2 text-sm font-bold">Apply</button>
             </div>
           </div>
         </div>

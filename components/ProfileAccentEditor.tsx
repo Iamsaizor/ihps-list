@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
-const DEFAULT = "#f97316";
+const DEFAULT = "#6089c9";
 const valid = (value: string) => /^#[0-9a-fA-F]{6}$/.test(value);
 export function ProfileAccentEditor({ userId }: { userId: string }) {
   const [color, setColor] = useState(DEFAULT);
@@ -46,7 +46,7 @@ export function ProfileAccentEditor({ userId }: { userId: string }) {
     </div>
     <div className="mt-4 flex flex-wrap gap-2">
       <button type="button" disabled={busy || !valid(color)} onClick={() => void save(color)} className="rounded-lg px-4 py-2 text-sm font-bold text-black disabled:opacity-40" style={{backgroundColor:valid(color) ? color : saved}}>{busy ? "SAVING..." : "SAVE ACCENT"}</button>
-      <button type="button" disabled={busy} onClick={() => void save(DEFAULT)} className="rounded-lg border border-white/20 px-4 py-2 text-sm font-bold text-gray-200 disabled:opacity-40">RESET TO ORANGE</button>
+      <button type="button" disabled={busy} onClick={() => void save(DEFAULT)} className="rounded-lg border border-white/20 px-4 py-2 text-sm font-bold text-gray-200 disabled:opacity-40">REVERT TO BLUE</button>
     </div>
     {message && <p role="status" className="mt-3 text-sm text-gray-300">{message}</p>}
   </section>;

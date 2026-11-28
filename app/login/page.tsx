@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 const field =
-  "w-full rounded-lg border border-white/15 bg-[#101014] px-4 py-3 text-white outline-none focus:border-orange-500";
+  "w-full rounded-lg border border-white/15 bg-[#101014] px-4 py-3 text-white outline-none focus:border-ihps-500";
 
 function safeNext(value: string | null) {
   return value?.startsWith("/") &&
@@ -105,7 +105,7 @@ function LoginPageContent() {
       <div className="mx-auto max-w-md rounded-2xl border border-white/10 bg-[#1b1b20] p-7">
         <Link
           href="/"
-          className="text-3xl font-black text-orange-500"
+          className="text-3xl font-black text-ihps-500"
         >
           ihPS
         </Link>
@@ -161,7 +161,7 @@ function LoginPageContent() {
 
           <button
             disabled={busy}
-            className="w-full rounded-lg bg-orange-500 px-4 py-3 font-extrabold disabled:opacity-50"
+            className="w-full rounded-lg bg-ihps-500 px-4 py-3 font-extrabold disabled:opacity-50"
           >
             {busy ? "PLEASE WAIT..." : "LOG IN"}
           </button>
@@ -170,7 +170,7 @@ function LoginPageContent() {
         <button
           disabled={busy || !email.trim()}
           onClick={resendEmail}
-          className="mt-4 text-sm text-orange-400 underline disabled:opacity-40"
+          className="mt-4 text-sm text-ihps-400 underline disabled:opacity-40"
         >
           Resend verification email
         </button>
@@ -178,7 +178,7 @@ function LoginPageContent() {
         <p className="mt-5 text-sm text-gray-400">
           New to ihPS?{" "}
           <Link
-            className="font-bold text-orange-400 underline"
+            className="font-bold text-ihps-400 underline"
             href={`/register?next=${encodeURIComponent(next)}`}
           >
             Create an account

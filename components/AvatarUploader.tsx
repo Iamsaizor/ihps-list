@@ -33,8 +33,8 @@ export function AvatarUploader({ userId, onUploaded }: { userId: string; onUploa
   return <div className="rounded-lg border border-white/10 bg-[#101014] p-4">
     <label className="block text-sm font-bold text-white" htmlFor="ihps-avatar-upload">Upload profile picture</label>
     <p className="mt-1 text-xs text-gray-400">PNG, JPG, or WebP · 3 MB max · Saved automatically</p>
-    <input id="ihps-avatar-upload" type="file" accept="image/png,image/jpeg,image/webp" disabled={busy} className="mt-3 block w-full text-sm text-gray-300 file:mr-3 file:rounded-lg file:border-0 file:bg-orange-500 file:px-3 file:py-2 file:font-bold file:text-white" onChange={e => { const file = e.target.files?.[0]; e.target.value = ""; void upload(file); }} />
-    {busy && <p className="mt-2 text-sm text-orange-400">Uploading...</p>}
+    <input id="ihps-avatar-upload" type="file" accept="image/png,image/jpeg,image/webp" disabled={busy} className="mt-3 block w-full text-sm text-gray-300 file:mr-3 file:rounded-lg file:border-0 file:bg-ihps-500 file:px-3 file:py-2 file:font-bold file:text-white" onChange={e => { const file = e.target.files?.[0]; e.target.value = ""; void upload(file); }} />
+    {busy && <p className="mt-2 text-sm text-ihps-400">Uploading...</p>}
     {message && <p role="status" className="mt-2 text-sm text-gray-300">{message}</p>}
   </div>;
 }

@@ -14,7 +14,7 @@ type Submission = {
 };
 type Message={id:string;submission_id:string;message:string;is_staff:boolean;is_internal:boolean;created_at:string};
 type Notification={id:string;submission_id:string;message:string;read_at:string|null;created_at:string};
-const input="w-full rounded-lg border border-white/10 bg-[#111115] px-3 py-3 text-sm text-white outline-none focus:border-orange-500";
+const input="w-full rounded-lg border border-white/10 bg-[#111115] px-3 py-3 text-sm text-white outline-none focus:border-ihps-500";
 const label="mb-1.5 block text-sm font-semibold text-gray-200";
 const blank={
  level_name:"",level_id:"",publisher:"",original_creators:"",length_seconds:"",bot_video_url:"",
@@ -100,13 +100,13 @@ export default function ImpossibleSubmitPage(){
  }
  return <main className="min-h-screen bg-[#101014] px-4 py-7 text-white"><div className="mx-auto max-w-7xl">
   <header className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5"><div>
-   <Link href="/" className="text-3xl font-black text-orange-500">ihPS</Link>
+   <Link href="/" className="text-3xl font-black text-ihps-500">ihPS</Link>
    <h1 className="mt-2 text-3xl font-extrabold">IMPOSSIBLE LEVEL SUBMISSION</h1>
    <p className="text-sm text-gray-400">Submit bot-verified impossible levels. This is NOT a human record submission.</p>
   </div><div className="flex gap-2"><Link href="/submit" className="rounded-lg bg-[#29292f] px-4 py-3 text-sm font-bold">RECORD SUBMISSIONS</Link><Link href="/" className="rounded-lg bg-[#29292f] px-4 py-3 text-sm font-bold">← VIEW LISTS</Link></div></header>
   {error&&<p role="alert" className="mb-4 rounded-lg border border-red-500/50 bg-red-500/10 p-3 text-sm text-red-300">{error}</p>}
   {success&&<p className="mb-4 rounded-lg border border-green-500/50 bg-green-500/10 p-3 text-sm text-green-300">{success}</p>}
-  {!userId&&<p className="mb-4 rounded-lg border border-orange-500/40 bg-orange-500/10 p-4">You must <Link className="font-bold underline" href="/login">sign in</Link> to submit levels.</p>}
+  {!userId&&<p className="mb-4 rounded-lg border border-ihps-500/40 bg-ihps-500/10 p-4">You must <Link className="font-bold underline" href="/login">sign in</Link> to submit levels.</p>}
   <div className="grid items-start gap-5 lg:grid-cols-[1.35fr_1fr]">
    <section className="rounded-xl border border-white/10 bg-[#19191e] p-5">
     <h2 className="mb-4 text-xl font-bold">{editId?"Revise your submission":"Submit an impossible level"}</h2>
@@ -118,8 +118,8 @@ export default function ImpossibleSubmitPage(){
       {([["has_swift_clicks","Contains swift clicks?"],["has_macrobuffs","Contains macrobuffs?"],["has_alignments","Contains alignments?"],["requires_tps_bypass","Requires TPS bypass?"],["has_complex_triggers","Uses complex triggers?"]] as [keyof Form,string][]).map(([k,title])=><div key={k}><label htmlFor={k} className={label}>{title}</label><select id={k} className={input} value={form[k]} onChange={e=>update(k,e.target.value)}><option value="no">No</option><option value="yes">Yes</option></select></div>)}
      </div>
      {([["level_description","Level description"],["technical_notes","Technical explanation / special mechanics"],["botting_conditions","Botting conditions / playback instructions"],["additional_notes","Additional notes"]] as [keyof Form,string][]).map(([k,title])=><div key={k}><label htmlFor={k} className={label}>{title}</label><textarea id={k} className={input} rows={3} value={form[k]} onChange={e=>update(k,e.target.value)}/></div>)}
-     <label className="flex items-start gap-3 rounded-lg border border-orange-500/30 bg-orange-500/5 p-4 text-sm"><input type="checkbox" checked={confirmed} onChange={e=>setConfirmed(e.target.checked)} className="mt-1 accent-orange-500"/>I confirm that I successfully botted this level from 0% to 100%, and the submitted evidence is authentic.</label>
-     <div className="flex flex-wrap gap-2"><button disabled={busy||!userId} className="rounded-lg bg-orange-500 px-5 py-3 font-black disabled:opacity-40">{busy?"SAVING...":editId?"SAVE REVISION":"SUBMIT LEVEL"}</button>{editId&&<button type="button" className="rounded-lg bg-[#29292f] px-4 py-3 font-bold" onClick={()=>{setEditId(null);setForm(blank);setConfirmed(false)}}>CANCEL EDIT</button>}</div>
+     <label className="flex items-start gap-3 rounded-lg border border-ihps-500/30 bg-ihps-500/5 p-4 text-sm"><input type="checkbox" checked={confirmed} onChange={e=>setConfirmed(e.target.checked)} className="mt-1 accent-ihps-500"/>I confirm that I successfully botted this level from 0% to 100%, and the submitted evidence is authentic.</label>
+     <div className="flex flex-wrap gap-2"><button disabled={busy||!userId} className="rounded-lg bg-ihps-500 px-5 py-3 font-black disabled:opacity-40">{busy?"SAVING...":editId?"SAVE REVISION":"SUBMIT LEVEL"}</button>{editId&&<button type="button" className="rounded-lg bg-[#29292f] px-4 py-3 font-bold" onClick={()=>{setEditId(null);setForm(blank);setConfirmed(false)}}>CANCEL EDIT</button>}</div>
     </form>
    </section>
    <div className="space-y-5">
@@ -133,29 +133,29 @@ export default function ImpossibleSubmitPage(){
       <p><strong className="text-white">Originality:</strong> Meaningful gameplay, visual, or technical effort is required.</p>
       <p><strong className="text-white">Swift clicks:</strong> Only Yes/No is requested; no count required.</p>
      </div>
-     <Link href="/rules/impossible" className="mt-4 inline-block font-bold text-orange-400 underline">Read ILL rules</Link>
+     <Link href="/rules/impossible" className="mt-4 inline-block font-bold text-ihps-400 underline">Read ILL rules</Link>
     </aside>
     <aside className="rounded-xl border border-white/10 bg-[#19191e] p-5">
      <h2 className="mb-3 text-lg font-bold">Notifications {notifications.filter(n=>!n.read_at).length>0?`(${notifications.filter(n=>!n.read_at).length} unread)`:""}</h2>
-     {notifications.length===0?<p className="text-sm text-gray-400">No notifications yet.</p>:notifications.map(n=><button key={n.id} onClick={()=>void read(n)} className={`mb-2 w-full rounded-lg p-3 text-left text-sm ${n.read_at?"bg-[#222229] text-gray-400":"border border-orange-500/40 bg-orange-500/10 text-white"}`}>{n.message}<span className="mt-1 block text-xs text-gray-500">{new Date(n.created_at).toLocaleString()}</span></button>)}
+     {notifications.length===0?<p className="text-sm text-gray-400">No notifications yet.</p>:notifications.map(n=><button key={n.id} onClick={()=>void read(n)} className={`mb-2 w-full rounded-lg p-3 text-left text-sm ${n.read_at?"bg-[#222229] text-gray-400":"border border-ihps-500/40 bg-ihps-500/10 text-white"}`}>{n.message}<span className="mt-1 block text-xs text-gray-500">{new Date(n.created_at).toLocaleString()}</span></button>)}
     </aside>
    </div>
   </div>
   <section className="mt-7 rounded-xl border border-white/10 bg-[#19191e] p-5">
    <div className="mb-4 flex items-center justify-between"><h2 className="text-xl font-bold">MY ILL SUBMISSIONS</h2><button onClick={()=>userId&&void load(userId)} className="rounded bg-[#29292f] px-3 py-2 text-xs font-bold">REFRESH</button></div>
    {!rows.length?<p className="text-sm text-gray-400">No level submissions yet.</p>:rows.map(s=><article key={s.id} className="mb-3 rounded-xl border border-white/10 bg-[#111115] p-4">
-    <div className="flex flex-wrap items-start justify-between gap-3"><div><h3 className="text-lg font-bold">{s.level_name} <span className="text-xs text-gray-400">#{s.level_id}</span></h3><p className="text-xs text-gray-400">Submitted {new Date(s.created_at).toLocaleString()} · Revision {s.revision}</p></div><span className="rounded bg-orange-500/15 px-3 py-1 text-xs font-bold text-orange-400">{statusLabel(s.status)}</span></div>
+    <div className="flex flex-wrap items-start justify-between gap-3"><div><h3 className="text-lg font-bold">{s.level_name} <span className="text-xs text-gray-400">#{s.level_id}</span></h3><p className="text-xs text-gray-400">Submitted {new Date(s.created_at).toLocaleString()} · Revision {s.revision}</p></div><span className="rounded bg-ihps-500/15 px-3 py-1 text-xs font-bold text-ihps-400">{statusLabel(s.status)}</span></div>
     {s.rejection_reason&&<p className="mt-2 text-sm text-red-300">Staff feedback: {s.rejection_reason}</p>}
-    {s.status==="placed"&&s.placed_level_id&&<Link href="/?list=impossible" className="mt-2 inline-block text-sm text-orange-400 underline">View Impossible List</Link>}
+    {s.status==="placed"&&s.placed_level_id&&<Link href="/?list=impossible" className="mt-2 inline-block text-sm text-ihps-400 underline">View Impossible List</Link>}
     <div className="mt-3 flex flex-wrap gap-2">
      <button onClick={()=>setOpenId(openId===s.id?null:s.id)} className="rounded bg-[#29292f] px-3 py-2 text-xs font-bold">{openId===s.id?"HIDE":"VIEW"} DISCUSSION</button>
      {["pending","evidence_requested","rejected"].includes(s.status)&&<button onClick={()=>edit(s)} className="rounded bg-[#29292f] px-3 py-2 text-xs font-bold">EDIT / RESUBMIT</button>}
      {["pending","under_review","evidence_requested","rejected"].includes(s.status)&&<button disabled={busy} onClick={()=>void action(s.id,"withdraw")} className="rounded bg-red-900/50 px-3 py-2 text-xs font-bold">WITHDRAW</button>}
     </div>
     {openId===s.id&&<div className="mt-4 space-y-3 rounded-lg bg-[#1d1d23] p-4">
-     {messages.filter(m=>m.submission_id===s.id).length===0?<p className="text-sm text-gray-400">No messages yet.</p>:messages.filter(m=>m.submission_id===s.id).map(m=><div key={m.id} className="border-b border-white/10 pb-2 text-sm"><strong className={m.is_staff?"text-orange-400":"text-white"}>{m.is_staff?"ILL Staff":"You"}</strong><span className="ml-2 text-xs text-gray-500">{new Date(m.created_at).toLocaleString()}</span><p className="mt-1 whitespace-pre-wrap">{m.message}</p></div>)}
+     {messages.filter(m=>m.submission_id===s.id).length===0?<p className="text-sm text-gray-400">No messages yet.</p>:messages.filter(m=>m.submission_id===s.id).map(m=><div key={m.id} className="border-b border-white/10 pb-2 text-sm"><strong className={m.is_staff?"text-ihps-400":"text-white"}>{m.is_staff?"ILL Staff":"You"}</strong><span className="ml-2 text-xs text-gray-500">{new Date(m.created_at).toLocaleString()}</span><p className="mt-1 whitespace-pre-wrap">{m.message}</p></div>)}
      <textarea className={input} value={reply} onChange={e=>setReply(e.target.value)} rows={2} placeholder="Reply to staff or provide requested evidence..."/>
-     <button disabled={busy||!reply.trim()} onClick={()=>void post(s.id)} className="rounded bg-orange-500 px-4 py-2 text-sm font-bold disabled:opacity-40">SEND REPLY</button>
+     <button disabled={busy||!reply.trim()} onClick={()=>void post(s.id)} className="rounded bg-ihps-500 px-4 py-2 text-sm font-bold disabled:opacity-40">SEND REPLY</button>
     </div>}
    </article>)}
   </section>

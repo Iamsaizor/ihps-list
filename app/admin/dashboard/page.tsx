@@ -77,7 +77,7 @@ export default function AdminDashboardPage() {
       <div className="mx-auto max-w-5xl">
         <header className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
           <div>
-            <Link href="/" className="text-3xl font-black text-[#ff7900]">ihPS</Link>
+            <Link href="/" className="text-3xl font-black text-[#6089C9]">ihPS</Link>
             <h1 className="mt-3 text-3xl font-black tracking-tight">ADMIN PANEL</h1>
             <p className="mt-1 text-sm text-[#a4a6b7]">Choose where you want to go.</p>
           </div>
@@ -90,7 +90,7 @@ export default function AdminDashboardPage() {
           <section className="rounded-xl border border-white/10 bg-[#1b1b21] p-7">
             <h2 className="text-xl font-black">STAFF LOGIN REQUIRED</h2>
             <p className="mt-2 text-sm text-[#a4a6b7]">Sign in with your ihPS account to see your authorized tools.</p>
-            <Link href="/admin/staff/login" className="mt-5 inline-block rounded-lg bg-[#ff7900] px-5 py-3 font-bold text-white">STAFF LOGIN →</Link>
+            <Link href="/admin/staff/login" className="mt-5 inline-block rounded-lg bg-[#6089C9] px-5 py-3 font-bold text-white">STAFF LOGIN →</Link>
           </section>
         ) : error ? (
           <div className="rounded-xl border border-red-700/60 bg-red-950/20 p-5 text-red-300">Unable to load staff access: {error}</div>
@@ -98,24 +98,24 @@ export default function AdminDashboardPage() {
           <section className="rounded-xl border border-white/10 bg-[#1b1b21] p-7">
             <h2 className="text-xl font-black">NO STAFF PERMISSIONS</h2>
             <p className="mt-2 text-sm text-[#a4a6b7]">Your account is signed in, but it has not been assigned to any list. Ask a founder to grant access.</p>
-            <Link href="/profile" className="mt-5 inline-block text-[#ff7900] hover:underline">Return to player area →</Link>
+            <Link href="/profile" className="mt-5 inline-block text-[#6089C9] hover:underline">Return to player area →</Link>
           </section>
         ) : (
           <>
             <div className="mb-5 flex flex-wrap items-center gap-3">
-              <span className="rounded-md bg-[#ff7900]/15 px-3 py-1 text-xs font-black text-[#ff9500]">{founder ? "FOUNDER" : "LIST MODERATOR"}</span>
+              <span className="rounded-md bg-[#6089C9]/15 px-3 py-1 text-xs font-black text-[#91B0E0]">{founder ? "FOUNDER" : "LIST MODERATOR"}</span>
               <span className="text-sm text-[#a4a6b7]">{founder ? "Access to all staff tools" : `Review access: ${listNames.join(", ") || "Assigned lists"}`}</span>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {tiles.map((tile) => (
-                <Link key={tile.href} href={tile.href} className="group flex min-h-[215px] flex-col rounded-xl border border-white/10 bg-[#1b1b21] p-6 transition hover:border-[#ff7900]/70 hover:bg-[#232329]">
+                <Link key={tile.href} href={tile.href} className="group flex min-h-[215px] flex-col rounded-xl border border-white/10 bg-[#1b1b21] p-6 transition hover:border-[#6089C9]/70 hover:bg-[#232329]">
                   <div className="flex items-start justify-between gap-2">
-                    <span className="text-3xl font-black text-[#ff7900]">{tile.icon}</span>
-                    {tile.badge && <span className="rounded bg-[#ff7900]/15 px-2 py-1 text-[10px] font-black tracking-wide text-[#ff9500]">{tile.badge}</span>}
+                    <span className="text-3xl font-black text-[#6089C9]">{tile.icon}</span>
+                    {tile.badge && <span className="rounded bg-[#6089C9]/15 px-2 py-1 text-[10px] font-black tracking-wide text-[#91B0E0]">{tile.badge}</span>}
                   </div>
                   <h2 className="mt-6 text-lg font-black">{tile.title}</h2>
                   <p className="mt-2 flex-1 text-sm leading-6 text-[#a4a6b7]">{tile.detail}</p>
-                  <span className="mt-5 text-sm font-black text-[#ff7900]">OPEN →</span>
+                  <span className="mt-5 text-sm font-black text-[#6089C9]">OPEN →</span>
                 </Link>
               ))}
             </div>
