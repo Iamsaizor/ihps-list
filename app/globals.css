@@ -6,11 +6,11 @@
 }
 
 @theme {
-  --color-ihps-300: #b4c9eb;
-  --color-ihps-400: #91b0e0;
-  --color-ihps-500: #6089c9;
-  --color-ihps-600: #4d73b3;
-  --color-ihps-950: #17263e;
+  --color-ihps-300: #f3b4bc;
+  --color-ihps-400: #e77986;
+  --color-ihps-500: #c83242;
+  --color-ihps-600: #ad2838;
+  --color-ihps-950: #39151c;
 }
 
 @theme inline {

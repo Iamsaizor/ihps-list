@@ -54,8 +54,8 @@ export default function StaffLoginPage() {
   return (
     <main className="min-h-screen bg-[#101014] text-white flex items-center justify-center p-5">
       <section className="w-full max-w-md rounded-xl border border-white/10 bg-[#1c1c21] p-8">
-        <Link href="/" className="text-3xl font-black text-[#6089C9]">ihPS</Link>
-        <p className="mt-6 text-xs font-bold tracking-widest text-[#6089C9]">AUTHORIZED PERSONNEL</p>
+        <Link href="/" className="text-3xl font-black text-[#C83242]">ihPS</Link>
+        <p className="mt-6 text-xs font-bold tracking-widest text-[#C83242]">AUTHORIZED PERSONNEL</p>
         <h1 className="mt-2 text-3xl font-black">FOUNDER LOGIN</h1>
         <p className="mt-2 text-sm text-gray-400">Sign in with an account authorized to manage ihPS staff.</p>
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
@@ -71,7 +71,7 @@ export default function StaffLoginPage() {
           </label>
           {error && <p role="alert" className="rounded-lg border border-red-600 p-3 text-sm text-red-300">{error}</p>}
           <button type="submit" disabled={loading}
-            className="w-full rounded-lg bg-[#6089C9] px-4 py-3 font-black disabled:opacity-50">
+            className="w-full rounded-lg bg-[#C83242] px-4 py-3 font-black disabled:opacity-50">
             {loading ? "CHECKING ACCESS..." : "SIGN IN"}
           </button>
         </form>
